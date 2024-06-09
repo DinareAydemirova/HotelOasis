@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  padding: 20px 0;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        max-width: 90px;
+        z-index: 3;
+      }
+
+      ul {
+        display: flex;
+        list-style: none;
+        gap: 40px;
+        transition: 0.3s;
+
+        a {
+          text-decoration: none;
+          color: #383a4e;
+          font-family: "Jost", sans-serif;
+          font-size: 15px;
+          display: block;
+          transition: 0.3s;
+          padding: 20px 0;
+        }
+
+        a:hover {
+          box-shadow: 0 -3px 0px orange inset;
+        }
+
+        .loinregister {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+
+          a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+        }
+
+        .active a {
+          box-shadow: 0 -3px 0px orange inset;
+        }
+      }
+
+      .menu {
+        display: none;
+        color: #383a4e;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .open {
+        right: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .navbar {
+    padding: 20px 40px;
+    .navigation {
+      ul {
+        justify-content: start;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100%;
+        width: 300px;
+        padding-top: 100px;
+        transition: right 0.3s ease;
+        z-index: 2;
+        background-color: white;
+      }
+
+      ul.open {
+        right: 0;
+      }
+
+      .menu {
+        display: block !important;
+        z-index: 3;
+      }
+    }
+  }
+}
