@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.quickInfoSec {
+  background-color: #f1ffff;
+  margin-top: 20px;
+  padding: 150px 0 50px 0;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .about {
+      background-color: white;
+      border-radius: 15px;
+      padding: 15px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      div {
+        padding: 50px;
+        font-family: "Jost", sans-serif;
+        h1 {
+          font-size: 38px;
+          font-weight: 600;
+          color: #383a4e;
+          margin-bottom: 20px;
+        }
+        p {
+          font-size: 15px;
+          color: #646875;
+          margin-bottom: 20px;
+          letter-spacing: 1px;
+          font-weight: 400;
+        }
+        a {
+          background-color: #3b61dd;
+          padding: 10px 20px;
+          font-size: 15px;
+          color: white;
+          border-radius: 20px;
+          transition: 0.3s;
+        }
+        a:hover {
+          background-color: #3b61ddd3;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .quickInfoSec {
+    padding: 200px 0 50px 0;
+    .about {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      text-align: center;
+      div {
+        text-align: center; /* Center text within div */
+      }
+      img {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .quickInfoSec {
+    img {
+      max-width: 400px !important;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 30px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .quickInfoSec {
+    img {
+      max-width: 300px !important;
+      margin: 0 auto;
+    }
+    h1 {
+        font-size: 20px !important;
+      }
+      p{
+        font-size: 13px !important;
+      }
+  }
+}
+@media only screen and (max-width: 320px) {
+    .quickInfoSec {
+      img {
+        max-width: 200px !important;
+        margin: 0 auto;
+      }
+    
+    }
+  }

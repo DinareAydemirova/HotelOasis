@@ -4,4 +4,138 @@
   box-sizing: border-box;
 }
 
+.main {
+  width: 100%;
+  height: 100vh;
+  position: relative;
 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    .content {
+      position: absolute;
+      top: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center children horizontally */
+      color: white;
+      text-align: center;
+
+      .stars {
+        display: flex;
+        justify-content: center;
+        color: orange;
+      }
+
+      h1 {
+        font-size: 4rem;
+        font-weight: 600;
+      }
+
+      p {
+        color: #ecfafb;
+        font-family: "Jost", sans-serif;
+        font-size: 15px;
+      }
+
+      .video {
+        padding: 10px 15px;
+        background-color: #3b61dd;
+        margin-top: 15px;
+        border-radius: 30px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+    }
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 15px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 15px;
+      position: absolute;
+      top: 90%;
+      div {
+        font-size: 45px;
+        padding: 30px 80px;
+        background-color: #f1ffff;
+        color: #7a7a7a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+}
+@media only screen and (max-width: 1220px) {
+  .features {
+    div{
+      font-size: 30px !important;
+      padding: 20px 60px !important;
+    }
+  }
+}
+@media only screen and (max-width: 550px) {
+  .features {
+    div{
+      font-size: 25px !important;
+      padding: 20px 40px !important;
+    }
+  }
+}
+@media only screen and (max-width: 470px) {
+  .features {
+    div{
+      font-size: 25px !important;
+      padding: 10px 20px !important;
+    }
+  }
+}
+@media only screen and (max-width: 300px) {
+  .features {
+    padding: 10px !important;
+    div{
+      font-size: 25px !important;
+      padding: 5px 10px !important;
+    }
+  }
+}
+@media only screen and (max-width: 1070px) {
+  .features {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
