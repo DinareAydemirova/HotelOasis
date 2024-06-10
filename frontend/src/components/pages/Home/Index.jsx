@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '../Home/hero/Index'
 import QuickInfo from './quickInfo/Index'
+import Gallery from './gallery/Index'
 
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Hero/>
       <QuickInfo/>
+      <Gallery/>
     </div>
   )
 }
