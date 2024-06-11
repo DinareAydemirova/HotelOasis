@@ -1,0 +1,118 @@
+.serVicesSec {
+    background-color: #f1ffff;
+    letter-spacing: 1px;
+    padding: 50px 0;
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      .headings {
+        font-family: "Jost", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        margin-bottom: 80px;
+        h1 {
+          font-size: 38px;
+          font-weight: 600;
+          color: #383a4e;
+        }
+        p {
+          font-size: 15px;
+          color: #64688c;
+          max-width: 700px;
+        }
+      }
+  
+      .services {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        .card {
+          padding: 15px;
+          background-color: white;
+          border-radius: 10px;
+          position: relative;
+          overflow: hidden;
+          img {
+            height: 600px;
+            width: 100%;
+          }
+          div {
+            position: absolute;
+            background-color: #64bc5f;
+            color: white;
+            border-radius: 5px;
+            padding: 4px 8px;
+            font-size: 15px;
+            top: 5%;
+            right: 5%;
+          }
+          span {
+            position: absolute;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            bottom: -13%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 20px;
+            width: 100%;
+            transition: bottom 0.5s, opacity 0.5s;
+            opacity: 0;
+            h1 {
+              font-size: 24px;
+              font-weight: 600;
+            }
+            p {
+              font-size: 15px;
+              color: #64688c;
+              letter-spacing: 1px;
+              max-width: 300px;
+            }
+          }
+          &:hover span {
+            bottom: 2%;
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr !important;
+      h1{
+        font-size: 20px !important;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 650px) {
+    .serVicesSec {
+      padding: 0 !important;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: 1fr !important;
+      img {
+        height: 500px !important;
+      }
+    }
+  }
+  
+  @media only screen and (max-width: 450px) {
+    .services {
+      img {
+        height: 300px !important;
+      }
+    }
+  }
+  

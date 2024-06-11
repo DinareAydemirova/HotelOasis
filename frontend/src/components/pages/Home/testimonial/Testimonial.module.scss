@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.testimonialSec {
+  background-color: #f1ffff;
+  padding: 50px 0;
+  letter-spacing: 1px;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .headings {
+      font-family: "Jost", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+      margin-bottom: 80px;
+      h1 {
+        font-size: 38px;
+        font-weight: 600;
+        color: #383a4e;
+      }
+      p {
+        font-size: 15px;
+        color: #64688c;
+        max-width: 700px;
+      }
+    }
+    .comments {
+      display: flex;
+gap: 20px;
+      .comment {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 50px;
+        img {
+          border-radius: 50%;
+          max-width: 60px;
+          height: 60px;
+        }
+        p {
+          font-size: 15px;
+          color: #64688c;
+          max-width: 600px;
+        }
+        .text{
+            position: relative;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            .quote1,
+            .quote2{
+                position: absolute;
+                font-size: 50px;
+                color: orange;
+
+            }
+            .quote1{
+                top: -20%;
+                left: 0;
+            }
+            .quote2{
+                right: 0;
+                bottom: -20%;
+            }
+
+        }
+      
+       
+        h2 {
+          font-size: 24px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

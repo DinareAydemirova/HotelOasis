@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.footer {
+  background-color: #4d506a;
+  color: white;
+  padding: 70px 20px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    .footerTexts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 150px;
+      .about {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        img {
+          max-width: 90px;
+        }
+        p {
+          color: #8588a2;
+          font-size: 15px;
+          max-width: 300px;
+          letter-spacing: 1px;
+        }
+        .social {
+          display: flex;
+          gap: 10px;
+          font-size: 15px;
+        }
+      }
+      .pages {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .links {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          font-size: 15px;
+          transition: 0.2s;
+        }
+        a:hover {
+          color: rgba(255, 255, 255, 0.442);
+        }
+      }
+      .instagram {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .images {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 10px;
+          a {
+            overflow: hidden;
+            img {
+              max-width: 81px;
+              border-radius: 10px;
+              transition: transform 0.3s ease;
+            }
+
+            img:hover {
+              transform: scale(1.04);
+              border-radius: 10px;
+            }
+          }
+        }
+      }
+    }
+    .bottom{
+        margin-top: 100px;
+        padding-bottom: 0 !important;
+        color: #8588a2;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+  }
+}
+@media only screen and (max-width: 1190px) {
+  .footerTexts {
+    gap: 100px !important;
+  }
+}
+@media only screen and (max-width: 1140px) {
+  .footerTexts {
+    gap: 50px !important;
+  }
+}
+
+@media only screen and (max-width: 890px) {
+  .footerTexts {
+    gap: 150px !important;
+   
+  }
+}
+
+@media only screen and (max-width: 320px) {
+    .images {
+        display: grid;
+        grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  
