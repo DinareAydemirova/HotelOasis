@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.aboutOurHotel {
+  font-family: "Jost", sans-serif;
+  letter-spacing: 1px;
+  background-color: #f1ffff;
+  padding: 300px 0 400px;
+  position: relative;
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .headings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 40px;
+
+      h1 {
+        font-size: 64px;
+        font-weight: 600;
+        color: #383a4e;
+      }
+
+      p {
+        font-size: 15px;
+        font-weight: 400;
+        color: #64688c;
+        max-width: 800px;
+      }
+
+      .home {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        background-color: orange;
+        padding: 10px 25px;
+        border-radius: 40px;
+        outline: 10px solid white;
+
+        p {
+          color: white;
+        }
+      }
+
+      .manager {
+        display: grid;
+        align-items: center;
+        max-width: 1300px;
+        position: absolute;
+        top: 80%;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+        .image {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border: 10px solid white;
+          background-color: #f1ffff;
+          text-align: left;
+
+          img {
+            max-width: 300px;
+            width: 100%;
+          }
+
+          h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #383a4e;
+            margin-top: 10px;
+          }
+
+          p {
+            font-size: 15px;
+            color: #64688c;
+          }
+        }
+
+        .info {
+          height: max-content;
+          background-color: white;
+          padding: 50px;
+          width: 100%;
+
+          .text {
+            font-size: 18px;
+            line-height: 1.75;
+            text-align: left;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .aboutOurHotel {
+    padding: 100px 0 150px;
+
+    .headings {
+      h1 {
+        font-size: 32px;
+      }
+
+      .manager {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  }
+}
