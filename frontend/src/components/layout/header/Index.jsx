@@ -39,9 +39,6 @@ const Header = () => {
               <li className={isActive("/restaurants")}>
                 <Link to="/restaurants">Restaurant</Link>
               </li>
-              <li className={isActive("/blog")}>
-                <Link to="/blog">Blog</Link>
-              </li>
               <li className={isActive("/contact")}>
                 <Link to="/contact">Contact</Link>
               </li>

@@ -34,14 +34,15 @@
     }
     .comments {
       display: flex;
-      gap: 20px;
+      .splide__pagination {
+        margin-top: 20px; // Add margin to the top of pagination dots
+      }
       .comment {
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        align-items: center;
         gap: 15px;
         margin-top: 50px;
         img {
@@ -53,26 +54,13 @@
           font-size: 15px;
           color: #64688c;
           max-width: 600px;
+        
         }
         .text {
-          position: relative;
           background-color: white;
-          padding: 15px;
+          padding: 30px;
           border-radius: 10px;
-          .quote1,
-          .quote2 {
-            position: absolute;
-            font-size: 50px;
-            color: orange;
-          }
-          .quote1 {
-            top: -20%;
-            left: 0;
-          }
-          .quote2 {
-            right: 0;
-            bottom: -20%;
-          }
+          
         }
 
         h2 {

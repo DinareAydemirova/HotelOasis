@@ -2,7 +2,6 @@ import Layout from '../components/layout/Index'
 import Home from '../components/pages/Home/Index'
 import Rooms from '../components/pages/Rooms/Index'
 import About from '../components/pages/About/Index'
-import Blog from '../components/pages/Blog/Index'
 import Contact from '../components/pages/Contact/Index'
 import Restaurants from '../components/pages/Restaurants/Index'
 import Login from '../components/pages/Login/Index'
@@ -32,10 +31,6 @@ const routes=[
             {
                 path:"/contact",
                 element:<Contact/>
-            },
-            {
-                path:"/blog",
-                element:<Blog/>
             },
             {
                 path:"/restaurants",
