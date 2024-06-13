@@ -2,7 +2,6 @@ import React from "react";
 import style from "../aboutOurHotel/AboutOurHotel.module.scss";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import { CgQuote } from "react-icons/cg";
 
 const AboutOurHotel = () => {
   return (

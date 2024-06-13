@@ -1,8 +1,18 @@
 import React from 'react'
+import Heading from './headings/Index';
+import AllRooms from './allRooms/Index';
+import BestRooms from './bestRooms/Index';
+import Testimonial from './testimonial/Index';
+
 
 const Rooms = () => {
   return (
-    <div>Rooms</div>
+   <>
+   <Heading/>
+   <AllRooms/>
+   <BestRooms/>
+  <Testimonial/>
+   </>
   )
 }
 

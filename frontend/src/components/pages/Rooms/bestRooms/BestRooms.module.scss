@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bestRoomsSec {
+  background-color: #f1ffff;
+  padding: 200px 0 100px 0;
+  margin-top: 20px;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    .headings {
+      font-family: "Jost", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+      margin-bottom: 80px;
+      h1 {
+        font-size: 38px;
+        font-weight: 600;
+        color: #383a4e;
+      }
+      p {
+        font-size: 15px;
+        color: #64688c;
+        max-width: 700px;
+        letter-spacing: 1px;
+      }
+      
+    }
+    .rooms {
+      display: flex;
+      gap: 15px;
+      .room {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        letter-spacing: 1px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      p {
+        font-size: 15px;
+        color: #64688c;
+        max-width: 400px;
+      }
+      img {
+        max-width: 400px;
+      }
+     
+      .booking {
+        display: flex;
+        justify-content: space-between;
+        .pricing {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          h1 {
+            color: #64bc5f;
+            font-size: 20px;
+            font-weight: 600;
+          }
+        }
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          background-color: #3b61dd;
+          color: white;
+          border-radius: 20px;
+          padding: 5px 10px;
+        }
+      }
+    }
+    .swipe {
+      display: flex;
+      gap: 20px;
+      border-radius: 40px;
+      padding: 10px 15px;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 16px;
+      .count {
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrows {
+        display: flex;
+        background-color: white;
+        border-radius: 30px;
+      }
+
+      .prevArrow,
+      .nextArrow {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .pricing {
+    h1 {
+      font-size: 20px !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .bestRoomsSec {
+    padding: 300px 0 100px 0 !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .bestRoomsSec {
+    padding: 400px 0 100px 0 !important;
+    .rooms {
+      padding: 0 !important;
+    }
+  }
+}
