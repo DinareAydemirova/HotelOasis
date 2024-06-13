@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.messageSection {
+  background-color: #f1ffff;
+  padding: 200px 0 100px 0;
+  margin-top: 20px;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    .headings {
+      font-family: "Jost", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+      margin-bottom: 80px;
+      h1 {
+        font-size: 38px;
+        font-weight: 600;
+        color: #383a4e;
+      }
+      p {
+        font-size: 15px;
+        color: #64688c;
+        max-width: 700px;
+        letter-spacing: 1px;
+      }
+      a {
+        background-color: #3b61dd;
+        padding: 10px 20px;
+        font-size: 15px;
+        color: white;
+        border-radius: 20px;
+        transition: 0.3s;
+        outline: 7px solid white;
+      }
+      a:hover {
+        background-color: #3b61ddc2;
+      }
+    }
+    .message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 100%;
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        
+        .inputs {
+          display: flex;
+          gap: 15px;
+          width: 100%;
+
+          input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+          }
+        }
+
+        textarea {
+          width: 100%;
+          padding: 15px;
+          border-radius: 10px;
+          border: 1px solid #ccc;
+          font-size: 16px;
+          min-height: 150px;
+        }
+      }
+    }
+    button{
+      background-color: #3b61dd;
+      color: white;
+      outline: 5px solid white;
+      border-radius: 20px;
+      padding: 5px 15px;
+      margin-top: 15px;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .messageSection {
+    margin-top: 0 !important;
+    padding: 100px 0;
+  }
+ 
+}

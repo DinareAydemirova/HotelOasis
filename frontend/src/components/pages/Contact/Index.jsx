@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import ContactUs from "./contactUs/Index";
+import LiveMessage from "./liveMessage/Index";
 
 const Contact = () => {
   return (
-    <div>Contact</div>
-  )
-}
+    <>
+      <ContactUs />
+      <LiveMessage/>
+    </>
+  );
+};
 
-export default Contact
+export default Contact;

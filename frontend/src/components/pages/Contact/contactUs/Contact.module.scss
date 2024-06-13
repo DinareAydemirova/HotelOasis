@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.contact {
+  font-family: "Jost", sans-serif;
+  letter-spacing: 1px;
+  background-color: #f1ffff;
+  padding: 150px 20px;
+  position: relative;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    .headings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 40px;
+
+      h1 {
+        font-size: 48px;
+        font-weight: 600;
+        color: #383a4e;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        color: #64688c;
+        max-width: 800px;
+      }
+
+      .home {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 15px;
+        background-color: orange;
+        padding: 10px 25px;
+        border-radius: 40px;
+        outline: 10px solid white;
+
+        p {
+          color: white;
+        }
+      }
+    }
+
+    .getInTouch {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      position: absolute;
+      margin-top: 50px;
+      right: 20%;
+      left: 20%;
+      .inTouch {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 40px;
+        background-color: #f1ffff;
+        border: 15px solid white;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;
+        .icon {
+          width: 45px;
+          height: 45px;
+          color: #7a7a7a;
+        }
+
+        p {
+          font-size: 15px;
+          letter-spacing: 1px;
+          font-weight: 400;
+          color: #64688c;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .contact {
+    padding: 100px 10px;
+    .container {
+      .getInTouch {
+        flex-direction: column;
+        position: static;
+        margin-top: 30px;
+        .inTouch {
+          max-width: 100%;
+         
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .contact {
+      .headings {
+        gap: 20px;
+        h1 {
+          font-size: 32px;
+        }
+        .home {
+          font-size: 12px;
+          padding: 8px 20px;
+        }
+      }
+      .getInTouch {
+        gap: 20px;
+        .inTouch {
+          .icon {
+            width: 35px;
+            height: 35px;
+          }
+       
+        }
+      }
+    }
+  }
+
