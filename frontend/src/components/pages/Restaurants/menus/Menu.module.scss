@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.allRooms {
+.allmenus {
   background-color: #f1ffff;
   .container {
     max-width: 1300px;
@@ -29,11 +29,11 @@
         background-color: #e0f7fa; 
       }
     }
-    .rooms {
+    .menus {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
       gap: 15px;
-      .room {
+      .menu {
         padding: 20px;
         background-color: white;
         border-radius: 10px;
@@ -44,13 +44,13 @@
         gap: 15px;
         transition: transform 0.3s; 
       }
-      .room:hover {
-        transform: translateY(-5px);
+      .menu:hover {
+        transform: translateY(-5px); 
       }
       p {
         font-size: 15px;
         color: #64688c;
-        max-width: 100%;
+        max-width: 400px;
       }
       img {
         width: 100%; 
@@ -71,29 +71,12 @@
             font-weight: 600;
           }
         }
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 5px;
-          background-color: #3b61dd;
-          color: white;
-          border-radius: 20px;
-          padding: 5px 10px !important;
-          border: none;
-          cursor: pointer;
-          transition: background-color 0.3s; 
-        }
-        button:hover {
-          background-color: #2a49b5; 
-        }
       }
     }
   }
 }
-
 @media only screen and (max-width: 400px) {
-  .allRooms{
+  .allmenu{
     .sorting {
       button {
         padding: 10px 20px !important;
@@ -102,7 +85,7 @@
   }
 }
 @media only screen and (max-width: 400px) {
-  .rooms {
+  .menus {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important; 
   }

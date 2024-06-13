@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .rooms {
+    background-color: #f1ffff;
+    padding: 200px 0;
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      .headings {
+        font-family: "Jost", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+        h1 {
+          font-size: 64px;
+          font-weight: 600;
+          color: #383a4e;
+        }
+        p {
+          font-size: 15px;
+          color: #64688c;
+          max-width: 800px;
+          letter-spacing: 1px;
+        }
+        .home {
+          display: flex;
+          align-items: center;
+          color: white;
+          font-size: 15px;
+          background-color: orange;
+          padding: 10px 25px;
+          border-radius: 40px;
+          outline: 10px solid white;
+  
+          p {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  

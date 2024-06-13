@@ -6,8 +6,7 @@
 
 .bestRoomsSec {
   background-color: #f1ffff;
-  padding: 200px 0 100px 0;
-  margin-top: 20px;
+  padding: 100px 0 ;
   .container {
     max-width: 1300px;
     margin: 0 auto;
@@ -122,16 +121,4 @@
   }
 }
 
-@media only screen and (max-width: 650px) {
-  .bestRoomsSec {
-    padding: 300px 0 100px 0 !important;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .bestRoomsSec {
-    padding: 400px 0 100px 0 !important;
-    .rooms {
-      padding: 0 !important;
-    }
-  }
-}
+

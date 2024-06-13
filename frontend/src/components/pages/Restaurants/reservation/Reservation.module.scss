@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.reservation {
+  font-family: "Jost", sans-serif;
+  letter-spacing: 1px;
+  background-color: #f1ffff;
+  padding: 100px 0;
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    .reserveTable {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      padding: 20px;
+      flex-wrap: wrap;
+
+      .about {
+        padding: 20px ;
+
+        h1 {
+          font-size: 38px;
+          font-weight: 600;
+          color: #383a4e;
+          max-width: 400px;
+          margin-top: 20px;
+        }
+
+        p {
+          font-size: 15px;
+          color: #64688c;
+          max-width: 500px;
+          margin-top: 20px;
+        }
+
+        button {
+          font-size: 15px;
+          padding: 10px 24px;
+          background-color: #3b61dd;
+          border-radius: 30px;
+          color: white;
+          margin: 20px 0;
+        }
+      }
+
+      .image {
+        max-width: 600px;
+        max-height: 400px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1189px) {
+  .reservation {
+    .about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center !important;
+     
+    }
+  }
+}
