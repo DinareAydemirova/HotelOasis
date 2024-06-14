@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "../allRooms/AllRooms.module.scss";
 import { CiBookmark } from "react-icons/ci";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const AllRooms = () => {
   const [data, setData] = useState([]);
@@ -38,9 +39,9 @@ const AllRooms = () => {
                 <h1>${elem.price}</h1>
                 <p>per night</p>
               </div>
-              <button>
+              <Link to={`/${elem._id}`}>
                 <CiBookmark /> Book
-              </button>
+              </Link>
             </div>
           </div>
           )
