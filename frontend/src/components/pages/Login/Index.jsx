@@ -1,9 +1,18 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
     <section className="gradient-form h-full bg-cyan-50 dark:bg-neutral-700">
+      <Helmet>
+        <title>Login - kinsley</title>
+        <link
+          rel="shortcut icon"
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
+          type="image/x-icon"
+        />
+      </Helmet>
       <div className="container h-full p-10">
         <div className="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200 mt-24">
           <div className="w-full max-w-md">
