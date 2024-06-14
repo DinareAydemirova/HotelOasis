@@ -97,6 +97,7 @@ const Menu = () => {
             </div>
           </div>
         </div>
+        <button className={style.loadMore}>Load more</button>
       </div>
     </div>
   );

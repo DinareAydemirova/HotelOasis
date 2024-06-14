@@ -21,7 +21,7 @@ const routes=[
                 element:<Home/>
             },
             {
-                path:"/rooms",
+                path:"/Rooms",
                 element:<Rooms/>
             },
             {

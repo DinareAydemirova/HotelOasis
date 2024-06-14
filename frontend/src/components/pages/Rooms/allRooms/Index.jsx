@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../allRooms/AllRooms.module.scss";
 import { CiBookmark } from "react-icons/ci";
+import axios from "axios";
 
 const AllRooms = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("/rooms").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   return (
     <div className={style.allRooms}>
       <div className={style.container}>
@@ -13,20 +22,20 @@ const AllRooms = () => {
           <button>Standard</button>
         </div>
         <div className={style.rooms}>
-          <div className={style.room}>
+          {data?.map((elem) => {
+          return(
+            <div className={style.room}>
             <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
+              src={elem.images[0]}
               alt=""
             />
-            <h2>Deluxe Room</h2>
+            <h2>{elem.name}</h2>
             <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
+              {elem.description.slice(0,90)}...
             </p>
             <div className={style.booking}>
               <div className={style.pricing}>
-                <h1>$49</h1>
+                <h1>${elem.price}</h1>
                 <p>per night</p>
               </div>
               <button>
@@ -34,112 +43,10 @@ const AllRooms = () => {
               </button>
             </div>
           </div>
-          <div className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </div>
-          <div className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </div>
-          <div className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </div>
-          <div className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </div>
-          <div className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </div>
+          )
+          })}
         </div>
+        <button className={style.loadMore}>Load more</button>
       </div>
     </div>
   );
