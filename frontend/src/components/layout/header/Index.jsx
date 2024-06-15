@@ -37,7 +37,7 @@ const Header = () => {
                 <Link to="/Rooms">Rooms</Link>
               </li>
               <li className={isActive("/restaurants")}>
-                <Link to="/restaurants">Restaurant</Link>
+                <Link to="/Restaurants">Restaurant</Link>
               </li>
               <li className={isActive("/contact")}>
                 <Link to="/contact">Contact</Link>

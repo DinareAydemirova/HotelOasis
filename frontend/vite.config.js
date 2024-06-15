@@ -14,6 +14,12 @@ export default defineConfig({
       },
       "/team":{
         target:"http://localhost:3000"
+      },
+      "/menu":{
+        target:"http://localhost:3000"
+      },
+      "/restaurant":{
+        target:"http://localhost:3000"
       }
     }
   }

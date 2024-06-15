@@ -16,7 +16,7 @@ const AllRooms = () => {
   }, []);
 
   const showMoreItems = () => {
-    setVisible((prevValue) => prevValue + 8);
+    setVisible((prevValue) => prevValue + 4);
   };
 
   const filteredData = data.filter((room) => {

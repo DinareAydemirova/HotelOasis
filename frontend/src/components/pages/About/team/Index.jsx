@@ -15,6 +15,8 @@ const Team = () => {
     });
   }, []);
 
+  const filteredData = data.filter((elem) => elem.position !== "Chef");
+
   return (
     <div className={style.teamSec}>
       <div className={style.container}>
@@ -29,7 +31,7 @@ const Team = () => {
         </div>
 
         <div className={style.teamMembers}>
-          {data?.map((elem) => {
+          {filteredData?.map((elem) => {
            return(
             <div className={style.member} key={elem._id}>
             <img

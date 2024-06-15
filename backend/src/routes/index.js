@@ -3,6 +3,10 @@ const router = express.Router()
 const galleryController= require("../controllers/galleryController")
 const roomsController=require("../controllers/roomsController")
 const teamController=require("../controllers/teamController")
+const menuController=require("../controllers/menuController")
+const restaurantController=require("../controllers/restaureantController")
+
+
 
 
 router.get("/gallery", galleryController.getAllImages)
@@ -26,5 +30,19 @@ router.get("/team/:id", teamController.getMemberById)
 router.delete("/team/:id", teamController.deleteMemberById)
 router.patch("/team/:id", teamController.patchMemberId)
 router.put("/team/:id", teamController.putMemberById)
+
+router.get("/menu", menuController.getAllMenu)
+router.post("/menu", menuController.postMeals)
+router.get("/menu/:id", menuController.getMealById)
+router.delete("/menu/:id", menuController.deleteMealById)
+router.patch("/menu/:id", menuController.patchgMealId)
+router.put("/menu/:id", menuController.putMealById)
+
+router.get("/restaurant", restaurantController.getAllImages)
+router.post("/restaurant", restaurantController.postImages)
+router.get("/restaurant/:id", restaurantController.getImageById)
+router.delete("/restaurant/:id", restaurantController.deleteImageById)
+router.patch("/restaurant/:id", restaurantController.patchgImageId)
+router.put("/restaurant/:id", restaurantController.putImageyById)
 
 module.exports = router

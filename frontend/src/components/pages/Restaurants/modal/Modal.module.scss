@@ -1,0 +1,67 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.71); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; 
+  
+    .container {
+      width: 500px;
+      max-width: 100%; 
+      padding: 20px;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px; 
+  
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+  
+        input,
+        select {
+          padding: 10px;
+          background-color: #f1ffff;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+  
+        button {
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+  
+        button:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  
+    .closeButton {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+  

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "../reservation/Reservation.module.scss";
+import Modal from "../modal/Index";
 
 const Reservation = () => {
+  const [openModal, setmpenModal] = useState(false)
   return (
     <div className={style.reservation}>
       <div className={style.container}>
@@ -20,10 +22,13 @@ const Reservation = () => {
               commodi id officiis itaque esse adipisci, necessitatibus
               asperiores, illo odio.
             </p>
-            <button >Reservation</button>
+
+            <button onClick={()=> {setmpenModal(true)}}>Reservation</button>
+           
           </div>
-         
         </div>
+        {openModal && <Modal closeModal={setmpenModal}/>}
+
       </div>
     </div>
   );

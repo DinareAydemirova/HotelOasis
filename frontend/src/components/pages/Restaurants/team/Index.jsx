@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../team/Team.module.scss";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
+import axios from "axios";
 
 const Team = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("/team").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
+  const filteredData= data.filter((elem)=> elem.position =="Chef")
+
   return (
     <div className={style.teamSec}>
       <div className={style.container}>
@@ -20,94 +31,32 @@ const Team = () => {
         </div>
 
         <div className={style.teamMembers}>
-          <div className={style.member}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/rteam-1.jpg"
-              alt=""
-            />
-            <h3>Emma Newman</h3>
-            <p>Chef</p>
-            <div className={style.social}>
-              <div>
-                <FaFacebookF />
+          {filteredData.map((elem) => {
+            return (
+              <div className={style.member}>
+                <img
+                  src={elem.image}
+                  alt=""
+                />
+                <h3>{elem.fullname}</h3>
+                <p>{elem.position}</p>
+                <div className={style.social}>
+                  <div>
+                    <FaFacebookF />
+                  </div>
+                  <div>
+                    <FaInstagram />
+                  </div>
+                  <div>
+                    <FaTwitter />
+                  </div>
+                  <div>
+                    <FaYoutube />
+                  </div>
+                </div>
               </div>
-              <div>
-                <FaInstagram />
-              </div>
-              <div>
-                <FaTwitter />
-              </div>
-              <div>
-                <FaYoutube />
-              </div>
-            </div>
-          </div>
-          <div className={style.member}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/rteam-2.jpg"
-              alt=""
-            />
-            <h3>Paul Trueman</h3>
-            <p>Chef</p>
-            <div className={style.social}>
-              <div>
-                <FaFacebookF />
-              </div>
-              <div>
-                <FaInstagram />
-              </div>
-              <div>
-                <FaTwitter />
-              </div>
-              <div>
-                <FaYoutube />
-              </div>
-            </div>
-          </div>
-          <div className={style.member}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/rteam-3.jpg"
-              alt=""
-            />
-            <h3>Viktoria Freeman</h3>
-            <p>Chef</p>
-            <div className={style.social}>
-              <div>
-                <FaFacebookF />
-              </div>
-              <div>
-                <FaInstagram />
-              </div>
-              <div>
-                <FaTwitter />
-              </div>
-              <div>
-                <FaYoutube />
-              </div>
-            </div>
-          </div>
-          <div className={style.member}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/rteam-2.jpg"
-              alt=""
-            />
-            <h3>Paul Trueman</h3>
-            <p>Chef</p>
-            <div className={style.social}>
-              <div>
-                <FaFacebookF />
-              </div>
-              <div>
-                <FaInstagram />
-              </div>
-              <div>
-                <FaTwitter />
-              </div>
-              <div>
-                <FaYoutube />
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

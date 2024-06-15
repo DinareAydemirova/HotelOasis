@@ -1,16 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "../gallery/Gallery.module.scss";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, A11y } from "swiper/modules";
+import axios from "axios";
 import "swiper/css";
 import "swiper/css/navigation";
 
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
+  const [data, setData] = useState([]);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  useEffect(() => {
+    axios.get("/restaurant").then((res) => {
+      setData(res.data);
+    });
+  }, []);
 
   return (
     <div className={style.gallerySec}>
@@ -57,46 +65,16 @@ const Gallery = () => {
               },
             }}
           >
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-1.jpg"
-                alt="Slide 1"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-2.jpg"
-                alt="Slide 2"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-3.jpg"
-                alt="Slide 3"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-4.jpg"
-                alt="Slide 4"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-5.jpg"
-                alt="Slide 5"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://kinsley.bslthemes.com/wp-content/uploads/2021/12/res-6.jpg"
-                alt="Slide 6"
-              />
-            </SwiperSlide>
-           
+            {data?.map((elem) => {
+              return (
+                <SwiperSlide>
+                  <img src={elem.image} alt="Slide 1" />
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
           <div className={style.count}>
-            {currentSlide}/{totalSlides}
+            {currentSlide}/{data.length}
           </div>
           <div className={style.arrows}>
             <div ref={prevRef} className={style.prevArrow}>
@@ -108,26 +86,21 @@ const Gallery = () => {
           </div>
         </div>
         <div className={style.features}>
-          <div >
+          <div>
             <span>400+</span>
-            <p>Guests daily
-
-            </p>
+            <p>Guests daily</p>
           </div>
           <div>
             <span>600</span>
-            <p>Orders daily
-            </p>
+            <p>Orders daily</p>
           </div>
-          <div >
+          <div>
             <span>4</span>
-            <p>Сomfortable halls
-            </p>
+            <p>Сomfortable halls</p>
           </div>
-          <div >
+          <div>
             <span>14</span>
-            <p>Professional chefs
-            </p>
+            <p>Professional chefs</p>
           </div>
         </div>
       </div>
