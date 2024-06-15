@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from '../bestRooms/BestRooms.module.scss'
 import { Link } from "react-router-dom";
 import { CiBookmark } from "react-icons/ci";
@@ -7,12 +7,23 @@ import { Navigation, A11y } from "swiper/modules";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import "swiper/css";
 import "swiper/css/navigation";
+import axios from "axios";
 
 const BestRooms = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
+  const [data, setData] = useState([]);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  useEffect(() => {
+    axios.get("/rooms").then((res)=>{
+      const filteredRooms=res.data.filter(room=> room.rate===5);
+      setData(filteredRooms)
+    })
+  }, [])
+  
+
 
   return (
     <div className={style.bestRoomsSec}>
@@ -59,159 +70,37 @@ const BestRooms = () => {
             },
           }}
         >
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
+          {data?.map((elem, index)=>{
+            return(
+              <SwiperSlide className={style.room} key={index}>
+              <img
+                src={elem.images[0]}
+                alt=""
+              />
+              <h2>{elem.name}</h2>
+              <p>
+                {elem.description.slice(0,90)}...
+              </p>
+              <div className={style.booking}>
+                <div className={style.pricing}>
+                  <h1>${elem.price}</h1>
+                  <p>per night</p>
+                </div>
+                <Link to={`/${elem._id}`}>
+                  <CiBookmark /> Book
+                </Link>
               </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide className={style.room}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/08/room-1.jpg"
-              alt=""
-            />
-            <h2>Deluxe Room</h2>
-            <p>
-              Image for cattle earth. May one Which life divide sea. Optio
-              veniam quibusdam fugit aspernatur ratione rerum necessitatibus
-              ips...
-            </p>
-            <div className={style.booking}>
-              <div className={style.pricing}>
-                <h1>$49</h1>
-                <p>per night</p>
-              </div>
-              <button>
-                <CiBookmark /> Book
-              </button>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
+            )
+          })}
+         
+        
           
         </Swiper>
 
         <div className={style.swipe}>
           <div className={style.count}>
-            {currentSlide}/{totalSlides}
+            {currentSlide}/{data.length}
           </div>
           <div className={style.arrows}>
             <div ref={prevRef} className={style.prevArrow}>

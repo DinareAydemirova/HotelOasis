@@ -9,7 +9,8 @@
   .container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 15px; 
+    padding: 0 15px;
+   
     .sorting {
       display: flex;
       justify-content: center;
@@ -21,28 +22,35 @@
         background-color: white;
         border-radius: 30px;
         font-size: 15px;
-        border: 1px solid #ddd; 
+        border: 1px solid #ddd;
         cursor: pointer;
-        transition: background-color 0.3s; 
+        transition: background-color 0.3s;
       }
       button:hover {
-        background-color: #e0f7fa; 
+        background-color: #e0f7fa;
       }
+
+      button.active {
+        background-color: #3b61dd;
+        color: white;
+      }
+
+     
     }
     .rooms {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 15px;
       .room {
         padding: 20px;
         background-color: white;
         border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         letter-spacing: 1px;
         display: flex;
         flex-direction: column;
         gap: 15px;
-        transition: transform 0.3s; 
+        transition: transform 0.3s;
       }
       .room:hover {
         transform: translateY(-5px);
@@ -53,7 +61,7 @@
         max-width: 100%;
       }
       img {
-        width: 100%; 
+        width: 100%;
         max-width: 100%;
         border-radius: 10px;
       }
@@ -82,27 +90,33 @@
           padding: 5px 10px !important;
           border: none;
           cursor: pointer;
-          transition: background-color 0.3s; 
+          transition: background-color 0.3s;
         }
         button:hover {
-          background-color: #2a49b5; 
+          background-color: #2a49b5;
         }
       }
+    }
+    .load{
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
 
+      .loadMore {
+        padding: 5px 15px;
+        background-color: #3b61dd;
+        color: white;
+        border-radius: 20px;
+        outline: 5px solid white;
+        
+      }
     }
-    .loadMore{
-      padding: 5px 15px;
-      background-color: #3b61dd;
-      color: white;
-      border-radius: 20px;
-      outline: 5px solid white;
-      margin-top: 15px;
-    }
+  
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .allRooms{
+  .allRooms {
     .sorting {
       button {
         padding: 10px 20px !important;
@@ -113,6 +127,6 @@
 @media only screen and (max-width: 400px) {
   .rooms {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
   }
 }

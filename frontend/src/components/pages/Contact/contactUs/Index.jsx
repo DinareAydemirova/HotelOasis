@@ -26,21 +26,23 @@ const ContactUs = () => {
         </div>
         <div className={style.getInTouch}>
           <div className={style.inTouch}>
-            <CiLocationOn className={style.icon}/>
+            <CiLocationOn className={style.icon} />
             <p>Santo Domingo 9479 Magarto st.</p>
           </div>
           <div className={style.inTouch}>
-            <FiPhoneCall className={style.icon}/>
+            <FiPhoneCall className={style.icon} />
 
             <p>+93 (736) 6X8 84 84</p>
           </div>
           <div className={style.inTouch}>
-            <TfiEmail  className={style.icon}/>
+            <TfiEmail className={style.icon} />
 
             <p>kinsley.inbox@mail.com</p>
           </div>
         </div>
+      
       </div>
+     
     </div>
   );
 };

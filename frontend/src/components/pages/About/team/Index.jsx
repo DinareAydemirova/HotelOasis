@@ -31,7 +31,7 @@ const Team = () => {
         <div className={style.teamMembers}>
           {data?.map((elem) => {
            return(
-            <div className={style.member}>
+            <div className={style.member} key={elem._id}>
             <img
               src={elem.image}
               alt=""

@@ -4,7 +4,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import style from "../roomsDetail/detail.module.scss";
 import axios from "axios";
 
-
 const RoomDetail = () => {
   const [data, setData] = useState({
     name: "",
@@ -59,7 +58,10 @@ const RoomDetail = () => {
 
           <div className={style.book}>
             <div className={style.info}>
+            <p>Rating: {data.rate}</p>
+
               <p>People: {data.people}</p>
+
               <div>
                 <h1>${data.price}</h1>
                 <p>per night</p>

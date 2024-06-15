@@ -1,12 +1,14 @@
 import React from "react";
 import ContactUs from "./contactUs/Index";
 import LiveMessage from "./liveMessage/Index";
+import Map from "./map/Index";
+
 import { Helmet } from "react-helmet";
 
 const Contact = () => {
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Contact - kinsley</title>
         <link
           rel="shortcut icon"
@@ -15,7 +17,8 @@ const Contact = () => {
         />
       </Helmet>
       <ContactUs />
-      <LiveMessage/>
+      <LiveMessage />
+      <Map />
     </>
   );
 };
