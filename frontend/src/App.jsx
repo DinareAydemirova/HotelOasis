@@ -16,6 +16,8 @@ import Dashboard from "./components/pages/AdminPanel/Dashboard/Index";
 import ManageMenu from "./components/pages/AdminPanel/ManageMenu/Index";
 import ManageHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/Index";
 import ManageRestaurantGallery from "./components/pages/AdminPanel/ManageRestaurantGallery/Index";
+import ManageTeam from "./components/pages/AdminPanel/ManageTeam/Index";
+import ResetPssword from "./components/pages/ResetPassword/Index";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route path="restaurants" element={<Restaurants />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="resetpassword" element={<ResetPssword />} />
+
         </Route>
         <Route path="/admin" element={<AdminPanel />}>
           <Route index element={<Dashboard />} />
@@ -38,6 +42,8 @@ function App() {
           <Route path="menu" element={<ManageMenu />} />
           <Route path="gallery" element={<ManageHotelImage />} />
           <Route path="restaurant" element={<ManageRestaurantGallery />} />
+          <Route path="team" element={<ManageTeam />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

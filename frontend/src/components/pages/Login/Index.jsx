@@ -58,7 +58,7 @@ const Login = () => {
                         >
                           Log in
                         </button>
-                        <a href="#!" className="text-sm text-cyan-500 hover:text-cyan-600">Forgot password?</a>
+                        <Link to="/resetpassword" className="text-sm text-cyan-500 hover:text-cyan-600">Forgot password?</Link>
                       </div>
                       <div className="flex items-center justify-between pb-6 flex-wrap	">
                         <p className="mb-0 me-2 text-sm">Don't have an account?</p>

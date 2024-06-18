@@ -55,14 +55,6 @@ const Register = () => {
                       </div>
                       <div className="relative mb-4" data-twe-input-wrapper-init="">
                         <input
-                          type="text"
-                          className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-                          id="exampleFormControlInput4"
-                          placeholder="Username"
-                        />
-                      </div>
-                      <div className="relative mb-4" data-twe-input-wrapper-init="">
-                        <input
                           type="password"
                           className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
                           id="exampleFormControlInput5"

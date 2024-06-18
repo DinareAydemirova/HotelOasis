@@ -5,7 +5,8 @@ const roomsController=require("../controllers/roomsController")
 const teamController=require("../controllers/teamController")
 const menuController=require("../controllers/menuController")
 const restaurantController=require("../controllers/restaureantController")
-
+const userController=require("../controllers/userController")
+const { verifyAccess } = require("../middleware/authMiddleware");
 
 
 
@@ -44,5 +45,11 @@ router.get("/restaurant/:id", restaurantController.getImageById)
 router.delete("/restaurant/:id", restaurantController.deleteImageById)
 router.patch("/restaurant/:id", restaurantController.patchgImageId)
 router.put("/restaurant/:id", restaurantController.putImageyById)
+
+router.get("/users", userController.getAllUsers);
+router.get("/users/:id", userController.deleteUserById);
+router.post("/users", verifyAccess(["Admin"]), userController.createUser);
+router.put("/users/:id", verifyAccess(["Admin", "User"]), userController.updateUser);
+router.delete("/users/:id", verifyAccess(["Admin"]), userController.deleteUserById);
 
 module.exports = router
