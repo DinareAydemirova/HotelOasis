@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 
 const ManageMenu = () => {
@@ -17,6 +18,14 @@ const ManageMenu = () => {
   );
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
+       <Helmet>
+        <title>Admin Manage Menu - kinsley</title>
+        <link
+          rel="shortcut icon"
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
+          type="image/x-icon"
+        />
+      </Helmet>
       <div className="p-4 flex justify-between">
         <div className="flex gap-4">
           <h1 className="text-3xl">Menu</h1>

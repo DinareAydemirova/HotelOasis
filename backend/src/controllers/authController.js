@@ -8,12 +8,12 @@ const loginController=async(req, res)=>{
     const {email , password}=req.body;
     const user=await userModel.findOne({email:email});
     if(!user){
-        res.status(404).send({message: "User is not found!"})
+        res.status(404).json({message: "User is not found!"})
         return
     }
     const checkPassword=await bcrypt.compare(password , user.password);
     if(!checkPassword){
-        res.status(403).send({message: "Password is not correct!"});
+        res.status(403).json({message: "Password is not correct!"});
         return;
     }
     const token= jwt.sign(
@@ -29,9 +29,9 @@ const loginController=async(req, res)=>{
             expiresIn:"1h"
         }
     )
-    res.status(200).send(token)
+    res.status(200).json(token)
  } catch (error) {
-    res.status(500).send({message:error.message})
+    res.status(500).json({message:error.message})
  }
 }
 
@@ -40,7 +40,7 @@ const loginController=async(req, res)=>{
         const {email, password, firstName, lastName} =req.body;
         const existingUser =await userModel.findOne({email: email})
         if(existingUser){
-            res.status(409).send({message: "User Already Exist"})
+            res.status(409).json({message: "User Already Exist"})
             return
         }
         const hash= await bcrypt.hash(password, 12);
@@ -56,7 +56,7 @@ const loginController=async(req, res)=>{
         });
         res.status(200).json(token)
     } catch (error) {
-        res.status(500).send({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
@@ -65,17 +65,17 @@ const loginController=async(req, res)=>{
         const {email, password}=req.body
         const user= await userModel.findOne({email})
         if(!user){
-            return res.status(404).send({message:"User is not found"})
+            return res.status(404).json({message:"User is not found"})
         }
         const hashedPassword=await bcrypt.hash(password, 12)
 
         user.password=hashedPassword;
         await user.save()
 
-        res.status(200).send({message:"Password reset successfully"})
+        res.status(200).json({message:"Password reset successfully"})
     } catch (error) {
         console.error("Error resetting password:" , error)
-        res.status(500).send({message:"Failed to reset password"})
+        res.status(500).json({message:"Failed to reset password"})
     }
 }
 

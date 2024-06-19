@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 
 const ManageRooms = () => {
@@ -12,12 +13,31 @@ const ManageRooms = () => {
     });
   }, []);
 
+  const handleDelete = (id) => {
+    axios
+      .delete(`/rooms/${id}`)
+      .then(() => {
+        setData((prevData) => prevData.filter((room) => room._id !== id));
+      })
+      .catch((error) => {
+        console.error("There was an error deleting the room!", error);
+      });
+  };
+
   const filteredData = data.filter((room) =>
     room.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
+      <Helmet>
+        <title>Admin Manage Rooms - kinsley</title>
+        <link
+          rel="shortcut icon"
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
+          type="image/x-icon"
+        />
+      </Helmet>
       <div className="p-4 flex justify-between">
         <div className="flex gap-4">
           <h1 className="text-3xl">Rooms</h1>
@@ -90,6 +110,7 @@ const ManageRooms = () => {
                   <div className="flex justify-center">
                     <button
                       type="button"
+                      onClick={() => handleDelete(elem._id)}
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Delete

@@ -3,23 +3,23 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 
-const ManageTeam = () => {
+const ManageUsers = () => {
     const [data, setData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
   
     useEffect(() => {
-      axios.get("/team").then((res) => {
+      axios.get("/users").then((res) => {
         setData(res.data);
       });
     }, []);
   
-    const filteredData = data.filter((team) =>
-      team.fullname.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredData = data.filter((users) =>
+      users.firstName.toLowerCase().includes(searchQuery.toLowerCase())
     );
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
        <Helmet>
-        <title>Admin Manage Team - kinsley</title>
+        <title>Admin Manage Users - kinsley</title>
         <link
           rel="shortcut icon"
           href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
@@ -28,10 +28,10 @@ const ManageTeam = () => {
       </Helmet>
     <div className="p-4 flex justify-between">
       <div className="flex gap-4">
-        <h1 className="text-3xl">Team</h1>
+        <h1 className="text-3xl">Users</h1>
 
         <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
-          Add new team member
+          Add new User
         </button>
       </div>
       <div className="relative">
@@ -51,11 +51,10 @@ const ManageTeam = () => {
       <table className="w-full text-md bg-white shadow-md rounded mb-4">
         <thead>
           <tr className="border-b">
-            <th className="text-left p-3 px-5">Image</th>
-            <th className="text-left p-3 px-5">Full name</th>
-            <th className="text-left p-3 px-5">Position</th>
+            <th className="text-left p-3 px-5">First Name</th>
+            <th className="text-left p-3 px-5">Last name</th>
             <th className="text-left p-3 px-5">Email</th>
-            <th className="text-left p-3 px-5">Detail</th>
+            <th className="text-left p-3 px-5">Role</th>
             <th className="text-left p-3 px-5">Edit</th>
             <th className="text-left p-3 px-5">Delete</th>
           </tr>
@@ -66,22 +65,10 @@ const ManageTeam = () => {
               key={elem.id}
               className="border-b hover:bg-orange-100 bg-gray-100"
             >
-              <td className="p-3 px-5">
-                <img src={elem.image} alt={elem.name} className="w-24" />
-              </td>
-              <td className="p-3 px-5">{elem.fullname}</td>
-              <td className="p-3 px-5">{elem.position}</td>
+              <td className="p-3 px-5">{elem.firstName}</td>
+              <td className="p-3 px-5">{elem.lastName}</td>
               <td className="p-3 px-5">{elem.email}</td>
-              <td className="p-3 px-5">
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Detail
-                  </button>
-                </div>
-              </td>
+              <td className="p-3 px-5">{elem.role}</td>
               <td className="p-3 px-5">
                 <div className="flex justify-center">
                   <button
@@ -111,4 +98,4 @@ const ManageTeam = () => {
   )
 }
 
-export default ManageTeam
+export default ManageUsers

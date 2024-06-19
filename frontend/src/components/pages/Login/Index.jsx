@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <section className="gradient-form h-full bg-cyan-50 dark:bg-neutral-700">
       <Helmet>
@@ -28,55 +33,90 @@ const Login = () => {
                       />
                       <p className="mb-8 mt-4">Please login to your account</p>
                     </div>
-                    <form>
-                      <div className="relative mb-4" data-twe-input-wrapper-init="">
-                        <input
-                          type="text"
-                          className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-                          id="exampleFormControlInput4"
-                          placeholder="Username"
-                        />
-                      </div>
+                    <Formik
+                      initialValues={{ password: "", email: "" }}
+                      validationSchema={Yup.object({
+                        password: Yup.string()
+                          .min(8, "Must be at least 8 characters long")
+                          .required("Password is required"),
+                        email: Yup.string()
+                          .email("Invalid email address")
+                          .required("Email is required"),
+                      })}
+                    >
+                      <Form>
+                      <div className="relative mb-4">
+                            <Field
+                              type="email"
+                              name="email"
+                              className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                              id="exampleFormControlInput3"
+                              placeholder="Email"
+                            />
+                            <ErrorMessage
+                              name="email"
+                              component="span"
+                              className="text-red-500 text-sm"
+                            />
+                          </div>
 
-                      <div className="relative mb-4" data-twe-input-wrapper-init="">
-                        <input
-                          type="password"
-                          className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-                          id="exampleFormControlInput5"
-                          placeholder="Password"
-                        />
-                      </div>
-                      <div className="mb-12 pb-1 pt-1 text-center">
-                        <button
-                          className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                          type="button"
-                          data-twe-ripple-init=""
-                          data-twe-ripple-color="light"
-                          style={{
-                            background: "#80deea",
-                          }}
-                        >
-                          Log in
-                        </button>
-                        <Link to="/resetpassword" className="text-sm text-cyan-500 hover:text-cyan-600">Forgot password?</Link>
-                      </div>
-                      <div className="flex items-center justify-between pb-6 flex-wrap	">
-                        <p className="mb-0 me-2 text-sm">Don't have an account?</p>
-                        <Link
-                          to="/register"
-                          type="button"
-                          className="inline-block rounded border-2 border-cyan-500 px-6 pb-2 pt-2 text-xs font-medium uppercase leading-normal text-cyan-500 transition duration-150 ease-in-out hover:border-cyan-600 hover:bg-cyan-50 hover:text-cyan-600 focus:border-cyan-600 focus:bg-cyan-50 focus:text-cyan-600 focus:outline-none focus:ring-0 active:border-cyan-700 active:text-cyan-700 dark:hover:bg-cyan-900 dark:focus:bg-cyan-900"
-                          data-twe-ripple-init=""
-                          data-twe-ripple-color="light"
-                        >
-                          Register
-                        </Link>
-                      </div>
-                    </form>
+                        <div className="relative mb-4">
+                            <Field
+                              type={showPassword ? "text" : "password"}
+                              name="password"
+                              className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                              id="exampleFormControlInput5"
+                              placeholder="Password"
+                            />
+                            <span
+                              className="absolute right-3 top-2 cursor-pointer"
+                              onClick={() => setShowPassword(!showPassword)}
+                            >
+                              {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                            <ErrorMessage
+                              name="password"
+                              component="span"
+                              className="text-red-500 text-sm"
+                            />
+                          </div>
+                        <div className="mb-12 pb-1 pt-1 text-center">
+                          <button
+                            className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                            type="button"
+                            data-twe-ripple-init=""
+                            data-twe-ripple-color="light"
+                            style={{
+                              background: "#80deea",
+                            }}
+                          >
+                            Log in
+                          </button>
+                          <Link
+                            to="/resetpassword"
+                            className="text-sm text-cyan-500 hover:text-cyan-600"
+                          >
+                            Forgot password?
+                          </Link>
+                        </div>
+                        <div className="flex items-center justify-between pb-6 flex-wrap	">
+                          <p className="mb-0 me-2 text-sm">
+                            Don't have an account?
+                          </p>
+                          <Link
+                            to="/register"
+                            type="button"
+                            className="inline-block rounded border-2 border-cyan-500 px-6 pb-2 pt-2 text-xs font-medium uppercase leading-normal text-cyan-500 transition duration-150 ease-in-out hover:border-cyan-600 hover:bg-cyan-50 hover:text-cyan-600 focus:border-cyan-600 focus:bg-cyan-50 focus:text-cyan-600 focus:outline-none focus:ring-0 active:border-cyan-700 active:text-cyan-700 dark:hover:bg-cyan-900 dark:focus:bg-cyan-900"
+                            data-twe-ripple-init=""
+                            data-twe-ripple-color="light"
+                          >
+                            Register
+                          </Link>
+                        </div>
+                      </Form>
+                    </Formik>
                   </div>
                 </div>
-
-               
               </div>
             </div>
           </div>

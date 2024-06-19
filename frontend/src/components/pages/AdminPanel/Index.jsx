@@ -84,6 +84,20 @@ function AdminPanel() {
             </Link>
           </li>
           <li>
+            <Link
+              to="/admin/users"
+              className={`block py-2 px-4 rounded hover:bg-gray-700 hover:text-white ${
+                location.pathname === "/admin/team"
+                  ? "bg-gray-700 text-white"
+                  : ""
+              }`}
+            >
+              <p className="flex items-center gap-4">
+              <AiOutlineTeam /> Users
+              </p>
+            </Link>
+          </li>
+          <li>
             <button
               onClick={toggleGalleryLinks}
               className={`block py-2 px-4 rounded hover:bg-gray-700 hover:text-white w-full text-left`}

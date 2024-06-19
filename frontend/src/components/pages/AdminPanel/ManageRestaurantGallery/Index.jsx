@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 const ManageRestaurantGallery = () => {
   const [data, setData] = useState([]);
@@ -12,6 +13,14 @@ const ManageRestaurantGallery = () => {
 
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
+       <Helmet>
+        <title>Admin Manage gallery - kinsley</title>
+        <link
+          rel="shortcut icon"
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
+          type="image/x-icon"
+        />
+      </Helmet>
       <div className="p-4 flex justify-between">
         <h1 className="text-3xl">Hotel Gallery</h1>
         <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
