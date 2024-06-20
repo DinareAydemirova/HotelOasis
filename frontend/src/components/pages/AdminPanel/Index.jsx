@@ -87,7 +87,7 @@ function AdminPanel() {
             <Link
               to="/admin/users"
               className={`block py-2 px-4 rounded hover:bg-gray-700 hover:text-white ${
-                location.pathname === "/admin/team"
+                location.pathname === "/admin/users"
                   ? "bg-gray-700 text-white"
                   : ""
               }`}

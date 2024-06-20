@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel")
+const UserModel = require("../models/userModel")
 
 const bcrypt= require('bcrypt')
 const jwt= require("jsonwebtoken")
@@ -6,7 +6,7 @@ const jwt= require("jsonwebtoken")
 const loginController=async(req, res)=>{
  try {
     const {email , password}=req.body;
-    const user=await userModel.findOne({email:email});
+    const user=await UserModel.findOne({email:email});
     if(!user){
         res.status(404).json({message: "User is not found!"})
         return
@@ -38,13 +38,13 @@ const loginController=async(req, res)=>{
  const registerController = async (req, res) =>{
     try {
         const {email, password, firstName, lastName} =req.body;
-        const existingUser =await userModel.findOne({email: email})
+        const existingUser =await UserModel.findOne({email: email})
         if(existingUser){
             res.status(409).json({message: "User Already Exist"})
             return
         }
         const hash= await bcrypt.hash(password, 12);
-        const newUser=new userModel({
+        const newUser=new UserModel({
             email,
             password:hash,
             firstName,
@@ -63,7 +63,7 @@ const loginController=async(req, res)=>{
  const resetPsswordController=async(req, res)=>{
     try {
         const {email, password}=req.body
-        const user= await userModel.findOne({email})
+        const user= await UserModel.findOne({email})
         if(!user){
             return res.status(404).json({message:"User is not found"})
         }

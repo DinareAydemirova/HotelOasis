@@ -9,8 +9,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       const response = await fetch("http://localhost:3000/register", {
         method: "POST",
@@ -28,14 +27,11 @@ const Register = () => {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-      const userData = await response.json();
-      setUser(userData);
       resetForm();
       setError(null);
+      navigate("/login");
     } catch (error) {
       setError(error.message);
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -188,7 +184,7 @@ const Register = () => {
                               style={{
                                 background: " #80deea",
                               }}
-                              onClick={()=>navigate("/login")}
+                             
                             >
                               Sign up
                             </button>

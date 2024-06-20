@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
+import { Link, useNavigate } from "react-router-dom";
 
 const ManageRooms = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("/rooms").then((res) => {
@@ -41,7 +43,6 @@ const ManageRooms = () => {
       <div className="p-4 flex justify-between">
         <div className="flex gap-4">
           <h1 className="text-3xl">Rooms</h1>
-
           <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
             Add new menu
           </button>
@@ -76,7 +77,7 @@ const ManageRooms = () => {
           <tbody>
             {filteredData?.map((elem) => (
               <tr
-                key={elem.id}
+                key={elem._id}
                 className="border-b hover:bg-orange-100 bg-gray-100"
               >
                 <td className="p-3 px-5">
@@ -88,18 +89,19 @@ const ManageRooms = () => {
                 <td className="p-3 px-5">{elem.rate}</td>
                 <td className="p-3 px-5">
                   <div className="flex justify-center">
-                    <button
-                      type="button"
+                    <Link
+                      to={`/admin/rooms/${elem._id}`}
                       className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Detail
-                    </button>
+                    </Link>
                   </div>
                 </td>
                 <td className="p-3 px-5">
                   <div className="flex justify-center">
                     <button
                       type="button"
+                      onClick={() => navigate(`/admin/rooms/edit/${elem._id}`)}
                       className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                     >
                       Edit

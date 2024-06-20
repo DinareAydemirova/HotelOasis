@@ -1,54 +1,53 @@
-const User = require("../models/userModel");
+const UserModel = require("../models/userModel");
 
 const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await User.find();
-    res.status(200).json(allUsers);
+    const AllUsers = await UserModel.find({});
+    res.status(200).json(AllUsers);
   } catch (error) {
-    res.status(500).json({ message: "Users not found", error: error.message });
+    res.status(500).json({ message: "Users are not found" });
   }
 };
 
 const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).json(user);
+    const { id } = req.params;
+    const decoded = req.decoded;
+    const user = await UserModel.findById(id);
+    res.send(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.send(error.message);
   }
 };
 
 const createUser = async (req, res) => {
   try {
-    const obj = req.body;
-    const newUser = new User(obj);
+    const { email, password, firstName, lastName } = req.body;
+    const newUser = UserModel({ email, password, firstName, lastName });
     await newUser.save();
-    res.status(201).json(newUser);
+    res.send(newUser);
   } catch (error) {
-    res.status(400).json({ message: "User not created", error: error.message });
+    res.status(500).json("User is not created!");
   }
 };
 
-const deleteUserById = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).send(user);
-  } catch (error) {
-    res.status(500).send(error);
-  }
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const user = await UserModel.findByIdAndDelete(id);
+  res.send(user);
 };
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
   const { id } = req.params;
   const decoded = req.decoded;
 
-  const { email, firstName, lastName, role } = req.body;
+  const {
+    email,
+    firstName,
+    lastName,
+    role,
+  } = req.body;
 
   const update = {
     email,
@@ -57,21 +56,24 @@ const updateUser = async (req, res) => {
     role,
   };
 
+  const user = await UserModel.findById(id);
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  if (decoded.email !== user.email && decoded.role === "User") {
+    return res.status(403).send("You don't have access");
+  }
+
   try {
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    if (decoded.email !== user.email && decoded.role === "User") {
-      return res.status(403).json({ message: "You don't have access" });
-    }
+    const updatedUser = await UserModel.findByIdAndUpdate(id, update, {
+      new: true,
+    });
 
-    const updatedUser = await User.findByIdAndUpdate(id, update, { new: true });
-
-    res.status(200).json(updatedUser);
+    await updatedUser.save();
+    res.send(updatedUser);
   } catch (error) {
-    res.status(500).json({ message: "Error updating user", error: error.message });
+    res.status(500).json("Error updating user");
   }
 };
 
-module.exports = { getAllUsers, getUserById, createUser, deleteUserById, updateUser };
+module.exports = { getAllUsers, getUserById, createUser, deleteUser, updateUser };

@@ -19,6 +19,8 @@ import ManageRestaurantGallery from "./components/pages/AdminPanel/ManageRestaur
 import ManageTeam from "./components/pages/AdminPanel/ManageTeam/Index";
 import ResetPssword from "./components/pages/ResetPassword/Index";
 import ManageUsers from "./components/pages/AdminPanel/ManageUsers/Index";
+import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
+import EditRoom from "./components/pages/AdminPanel/ManageRooms/editRoom/Index";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
           <Route path="restaurant" element={<ManageRestaurantGallery />} />
           <Route path="team" element={<ManageTeam />} />
           <Route path="users" element={<ManageUsers />} />
+          <Route path="rooms/:id" element={<RoomDetailAdmin />} />
+          <Route path="rooms/edit/:id" element={<EditRoom />} />
         </Route>
       </Routes>
     </BrowserRouter>

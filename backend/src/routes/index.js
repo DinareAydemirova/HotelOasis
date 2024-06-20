@@ -47,9 +47,10 @@ router.patch("/restaurant/:id", restaurantController.patchgImageId)
 router.put("/restaurant/:id", restaurantController.putImageyById)
 
 router.get("/users", userController.getAllUsers);
-router.get("/users/:id", userController.deleteUserById);
-router.post("/users", verifyAccess(["Admin"]), userController.createUser);
-router.put("/users/:id", verifyAccess(["Admin", "User"]), userController.updateUser);
-router.delete("/users/:id", verifyAccess(["Admin"]), userController.deleteUserById);
+router.get("/users/:id", userController.getUserById);
+router.post("/users", userController.createUser);
+router.put("/users/:id", verifyAccess(["Admin"]), userController.updateUser);
+router.delete("/users/:id",  userController.deleteUser);
+
 
 module.exports = router
