@@ -1,5 +1,6 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import GridLoader from 'react-spinners/GridLoader';
 import Layout from "../src/components/layout/Index";
 import Home from "../src/components/pages/Home/Index";
 import Rooms from "../src/components/pages/Rooms/Index";
@@ -34,6 +35,25 @@ import PostHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/post
 import PostRestaurantImage from "./components/pages/AdminPanel/ManageRestaurantGallery/postRestaurantImage/Index";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <GridLoader color="#add8e6" loading={loading} />
+      </div>
+    );
+  }
+
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -70,7 +90,6 @@ function App() {
           <Route path="menu/post" element={<PostMenu />} />
           <Route path="gallery/post" element={<PostHotelImage />} />
           <Route path="restaurant/post" element={<PostRestaurantImage />} />
-
         </Route>
       </Routes>
     </BrowserRouter>
