@@ -2,16 +2,27 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const ManageMenu = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate= useNavigate()
 
   useEffect(() => {
     axios.get("/menu").then((res) => {
       setData(res.data);
     });
   }, []);
+
+  const handleDelete =(id)=>{
+    axios.delete(`/menu/${id}`).then(()=>{
+      setData((prevData)=> prevData.filter((menu)=> menu._id !== id))
+    })
+    .catch((error)=>{
+      console.error("There was an error deleting the menu!", error)
+    })
+  }
 
   const filteredData = data.filter((menu) =>
     menu.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -29,7 +40,9 @@ const ManageMenu = () => {
       <div className="p-4 flex justify-between">
         <div className="flex gap-4">
           <h1 className="text-3xl">Menu</h1>
-          <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
+          <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200"
+          onClick={()=>navigate("/admin/menu/post")}
+          >
             Add new menu
           </button>
         </div>
@@ -53,7 +66,7 @@ const ManageMenu = () => {
               <th className="text-left p-3 px-5">Image</th>
               <th className="text-left p-3 px-5">Name</th>
               <th className="text-left p-3 px-5">Price</th>
-              <th className="text-left p-3 px-5">catefory</th>
+              <th className="text-left p-3 px-5">category</th>
               <th className="text-left p-3 px-5">Detail</th>
               <th className="text-left p-3 px-5">Edit</th>
               <th className="text-left p-3 px-5">Delete</th>
@@ -76,6 +89,7 @@ const ManageMenu = () => {
                     <button
                       type="button"
                       className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={()=>navigate(`/admin/menu/${elem._id}`)}
                     >
                       Detail
                     </button>
@@ -86,6 +100,7 @@ const ManageMenu = () => {
                     <button
                       type="button"
                       className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={()=>navigate(`/admin/menu/edit/${elem._id}`)}
                     >
                       Edit
                     </button>
@@ -96,6 +111,7 @@ const ManageMenu = () => {
                     <button
                       type="button"
                       className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    onClick={()=>handleDelete(elem._id)}
                     >
                       Delete
                     </button>

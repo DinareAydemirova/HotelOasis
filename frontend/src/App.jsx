@@ -21,6 +21,17 @@ import ResetPssword from "./components/pages/ResetPassword/Index";
 import ManageUsers from "./components/pages/AdminPanel/ManageUsers/Index";
 import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
 import EditRoom from "./components/pages/AdminPanel/ManageRooms/editRoom/Index";
+import EditRestaurant from "./components/pages/AdminPanel/ManageRestaurantGallery/editRestaurant/Index";
+import EditHotelGallery from "./components/pages/AdminPanel/ManageHotelGalery/editHotelGallery/Index";
+import EditMenu from "./components/pages/AdminPanel/ManageMenu/editMenu/Index";
+import MenuDetail from "./components/pages/AdminPanel/ManageMenu/detailMenu/Index";
+import EditTeam from "./components/pages/AdminPanel/ManageTeam/editTeam/Index";
+import TeamDetail from "./components/pages/AdminPanel/ManageTeam/teamDetail/Index";
+import PostTeamMember from "./components/pages/AdminPanel/ManageTeam/postTeamMember/Index";
+import PostRooms from "./components/pages/AdminPanel/ManageRooms/postRooms/Index";
+import PostMenu from "./components/pages/AdminPanel/ManageMenu/postMenu/Index";
+import PostHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/postImage/Index";
+import PostRestaurantImage from "./components/pages/AdminPanel/ManageRestaurantGallery/postRestaurantImage/Index";
 
 function App() {
   return (
@@ -37,7 +48,6 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="resetpassword" element={<ResetPssword />} />
-
         </Route>
         <Route path="/admin" element={<AdminPanel />}>
           <Route index element={<Dashboard />} />
@@ -48,7 +58,19 @@ function App() {
           <Route path="team" element={<ManageTeam />} />
           <Route path="users" element={<ManageUsers />} />
           <Route path="rooms/:id" element={<RoomDetailAdmin />} />
+          <Route path="menu/:id" element={<MenuDetail />} />
+          <Route path="team/:id" element={<TeamDetail />} />
           <Route path="rooms/edit/:id" element={<EditRoom />} />
+          <Route path="restaurant/edit/:id" element={<EditRestaurant />} />
+          <Route path="gallery/edit/:id" element={<EditHotelGallery />} />
+          <Route path="menu/edit/:id" element={<EditMenu />} />
+          <Route path="team/edit/:id" element={<EditTeam />} />
+          <Route path="team/post" element={<PostTeamMember />} />
+          <Route path="rooms/post" element={<PostRooms />} />
+          <Route path="menu/post" element={<PostMenu />} />
+          <Route path="gallery/post" element={<PostHotelImage />} />
+          <Route path="restaurant/post" element={<PostRestaurantImage />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

@@ -43,8 +43,10 @@ const ManageRooms = () => {
       <div className="p-4 flex justify-between">
         <div className="flex gap-4">
           <h1 className="text-3xl">Rooms</h1>
-          <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
-            Add new menu
+          <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200"
+          onClick={()=>navigate("/admin/rooms/post")}
+          >
+            Add new room
           </button>
         </div>
         <div className="relative">

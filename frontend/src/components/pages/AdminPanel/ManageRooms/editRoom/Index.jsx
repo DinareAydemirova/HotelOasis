@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const EditRoom = () => {
   const { id } = useParams();
@@ -66,6 +67,14 @@ const EditRoom = () => {
 
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen flex items-center justify-center">
+       <Helmet>
+        <title>Admin Edit Room - kinsley</title>
+        <link
+          rel="shortcut icon"
+          href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKUgFpfnDFc3lR56q1erL71EEv1lNvDYrbfQ&s"
+          type="image/x-icon"
+        />
+      </Helmet>
       <form className="bg-white p-6 rounded shadow-md w-full max-w-lg" onSubmit={handleFormSubmit}>
         <h2 className="text-2xl mb-4">Edit Room</h2>
         <div className="mb-4">
