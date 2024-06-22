@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PostHotelImage = () => {
   const navigate = useNavigate();
@@ -19,9 +21,13 @@ const PostHotelImage = () => {
     axios
       .post("/gallery", values)
       .then(() => {
-        navigate("/admin/gallery");
+        toast.success("Image added successfully!");
+        setTimeout(() => {
+          navigate("/admin/gallery");
+        }, 1000); 
       })
       .catch((error) => {
+        toast.error("There was an error creating the image!");
         console.error("There was an error creating the image!", error);
       })
       .finally(() => {
@@ -39,6 +45,7 @@ const PostHotelImage = () => {
           type="image/x-icon"
         />
       </Helmet>
+      <ToastContainer />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

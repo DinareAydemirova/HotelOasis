@@ -30,9 +30,14 @@ const PostTeamMember = () => {
     axios
       .post("/team", values)
       .then(() => {
-        navigate("/admin/team");
+        toast.success("Image added successfully!");
+        setTimeout(() => {
+          navigate("/admin/team");
+        }, 1000); 
+        
       })
       .catch((error) => {
+        toast.error("There was an error creating the menu item!");
         console.error("There was an error creating the team member!", error);
       })
       

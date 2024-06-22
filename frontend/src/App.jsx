@@ -34,6 +34,7 @@ import PostHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/post
 import PostRestaurantImage from "./components/pages/AdminPanel/ManageRestaurantGallery/postRestaurantImage/Index";
 import Page404 from "./components/pages/404Page/Index";
 import PrivateRoute from "./routes/PrivateRouter";
+import EditUsers from "./components/pages/AdminPanel/ManageUsers/editUsers/Index";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -89,6 +90,7 @@ function App() {
               <Route path="gallery/edit/:id" element={<EditHotelGallery />} />
               <Route path="menu/edit/:id" element={<EditMenu />} />
               <Route path="team/edit/:id" element={<EditTeam />} />
+              <Route path="users/edit/:id" element={<EditUsers />} />
               <Route path="team/post" element={<PostTeamMember />} />
               <Route path="rooms/post" element={<PostRooms />} />
               <Route path="menu/post" element={<PostMenu />} />

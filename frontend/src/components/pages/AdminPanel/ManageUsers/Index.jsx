@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const ManageUsers = () => {
     const [data, setData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const navigate=useNavigate()
   
     useEffect(() => {
       axios.get("/users").then((res) => {
@@ -76,6 +78,7 @@ const ManageUsers = () => {
                   <button
                     type="button"
                     className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                  onClick={()=>navigate(`/admin/users/edit/${elem._id}`)}
                   >
                     Edit
                   </button>
