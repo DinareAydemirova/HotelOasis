@@ -39,6 +39,7 @@ const RoomDetailAdmin = () => {
           <thead>
             <tr className="border-b">
               <th className="text-left p-3 px-5">Images</th>
+              <th className="text-left p-3 px-5">ID</th>
               <th className="text-left p-3 px-5">Name</th>
               <th className="text-left p-3 px-5">Description</th>
               <th className="text-left p-3 px-5">Price</th>
@@ -61,6 +62,7 @@ const RoomDetailAdmin = () => {
                   />
                 ))}
               </td>
+              <td className="p-3 px-5">{data._id}</td>
               <td className="p-3 px-5">{data.name}</td>
               <td className="p-3 px-5">{data.description}</td>
               <td className="p-3 px-5">{data.price}</td>

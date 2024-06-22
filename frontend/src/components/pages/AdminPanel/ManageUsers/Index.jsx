@@ -51,6 +51,7 @@ const ManageUsers = () => {
       <table className="w-full text-md bg-white shadow-md rounded mb-4">
         <thead>
           <tr className="border-b">
+          <th className="text-left p-3 px-5">User ID</th>
             <th className="text-left p-3 px-5">First Name</th>
             <th className="text-left p-3 px-5">Last name</th>
             <th className="text-left p-3 px-5">Email</th>
@@ -65,6 +66,7 @@ const ManageUsers = () => {
               key={elem.id}
               className="border-b hover:bg-orange-100 bg-gray-100"
             >
+              <td className="p-3 px-5">{elem._id}</td>
               <td className="p-3 px-5">{elem.firstName}</td>
               <td className="p-3 px-5">{elem.lastName}</td>
               <td className="p-3 px-5">{elem.email}</td>

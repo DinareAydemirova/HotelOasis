@@ -38,7 +38,7 @@ const TeamDetail = () => {
         <table className="w-full text-md bg-white shadow-md rounded mb-4">
           <thead>
             <tr className="border-b">
-
+            <th className="text-left p-3 px-5">ID</th>
               <th className="text-left p-3 px-5">image</th>
               <th className="text-left p-3 px-5">Full Name</th>
               <th className="text-left p-3 px-5">Email</th>
@@ -54,9 +54,9 @@ const TeamDetail = () => {
               className="border-b hover:bg-orange-100 bg-gray-100"
             >
               <td className="p-3 px-5">
-                <img src={data.image} alt="" className="w-24"/>
+                <img src={data.image} alt="" className="w-full"/>
               </td>
-
+              <td className="p-3 px-5">{data._id}</td>
               <td className="p-3 px-5">{data.fullname}</td>
               <td className="p-3 px-5">{data.email}</td>
               <td className="p-3 px-5">{data.phone}</td>

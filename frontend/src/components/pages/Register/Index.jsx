@@ -87,9 +87,12 @@ const Register = () => {
                           )
                           .required("Repeat password is required"),
                       })}
-                      onSubmit={handleSubmit}
+                      onSubmit={(values, { setSubmitting, resetForm }) => {
+                        setSubmitting(false);
+                        handleSubmit(values, { resetForm });
+                      }}
                     >
-                      {({ isSubmitting }) => (
+                     
                         <Form>
                           <div className="relative mb-4">
                             <Field
@@ -180,7 +183,6 @@ const Register = () => {
                             <button
                               className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2"
                               type="submit"
-                              disabled={isSubmitting}
                               style={{
                                 background: " #80deea",
                               }}
@@ -188,12 +190,7 @@ const Register = () => {
                             >
                               Sign up
                             </button>
-                            <a
-                              href="#!"
-                              className="text-sm text-cyan-500 hover:text-cyan-600"
-                            >
-                              Forgot password?
-                            </a>
+                           
                           </div>
                           <div className="flex items-center justify-between pb-6">
                             <p className="mb-0 mr-2">Already have an account?</p>
@@ -205,7 +202,7 @@ const Register = () => {
                             </Link>
                           </div>
                         </Form>
-                      )}
+                    
                     </Formik>
                   </div>
                 </div>

@@ -7,6 +7,7 @@ const roomsSchema = mongoose.Schema({
   price: { type: Number, required: true },
   people: { type: Number, required: true },
   rate: { type: Number, required: true },
+  currentbookings: [],
 });
 
 module.exports = mongoose.model("Room", roomsSchema);

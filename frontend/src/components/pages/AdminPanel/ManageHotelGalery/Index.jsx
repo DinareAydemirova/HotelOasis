@@ -45,6 +45,7 @@ const ManageHotelImage = () => {
             <thead>
               <tr className="border-b">
                 <th className="text-left p-3 px-5">Image</th>
+                <th className="text-left p-3 px-5">ID</th>
                 <th className="text-left p-3 px-5">Edit</th>
                 <th className="text-left p-3 px-5">Delete</th>
               </tr>
@@ -58,6 +59,7 @@ const ManageHotelImage = () => {
                   <td className="p-3 px-5">
                     <img src={elem.Image} alt={elem.name} className="w-24" />
                   </td>
+                  <td className="p-3 px-5">{elem._id}</td>
                   <td className="p-3 px-5">
                     <div>
                       <button

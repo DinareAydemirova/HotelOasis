@@ -40,6 +40,7 @@ const MenuDetail = () => {
             <tr className="border-b">
 
               <th className="text-left p-3 px-5">Images</th>
+              <th className="text-left p-3 px-5">ID</th>
               <th className="text-left p-3 px-5">Name</th>
               <th className="text-left p-3 px-5">Ingredients</th>
               <th className="text-left p-3 px-5">Price</th>
@@ -54,7 +55,7 @@ const MenuDetail = () => {
               <td className="p-3 px-5">
                 <img src={data.image} alt="" className="w-24"/>
               </td>
-
+              <td className="p-3 px-5">{data._id}</td>
               <td className="p-3 px-5">{data.name}</td>
               <td className="p-3 px-5">{data.ingredients}</td>
               <td className="p-3 px-5">{data.price}</td>
