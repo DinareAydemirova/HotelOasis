@@ -69,7 +69,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="resetpassword" element={<ResetPassword />} />
-          <Route path="404" element={<Page404 />} />
+          <Route path="*" element={<Page404 />} />
          
         </Route>
         <Route element={<PrivateRoute roles={["Admin"]} />}>
