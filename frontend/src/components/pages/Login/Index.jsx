@@ -1,12 +1,43 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { UserContext } from "../../../context/userProvider";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
+  const { addToken } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+      const data = await response.json();
+      addToken(data);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      resetForm();
+      setError(null);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <section className="gradient-form h-full bg-cyan-50 dark:bg-neutral-700">
@@ -43,6 +74,10 @@ const Login = () => {
                           .email("Invalid email address")
                           .required("Email is required"),
                       })}
+                      onSubmit={(values, { setSubmitting, resetForm }) => {
+                        setSubmitting(false);
+                        handleSubmit(values, { resetForm });
+                      }}
                     >
                       <Form>
                       <div className="relative mb-4">
@@ -83,7 +118,7 @@ const Login = () => {
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <button
                             className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                            type="button"
+                            type="submit"
                             data-twe-ripple-init=""
                             data-twe-ripple-color="light"
                             style={{

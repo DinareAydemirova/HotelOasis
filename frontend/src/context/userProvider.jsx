@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import React, { createContext, useEffect, useState } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const UserContext = createContext();
 
@@ -30,21 +30,7 @@ const UserProvider = ({ children }) => {
     setDecode(tokenDecoded);
   }
 
-  // function addToken(token) {
-  //   setToken(token);
-  //   const tokenDecoded = jwtDecode(token);
-  //   setDecode(tokenDecoded);
-  
-  //   const expirationTime = tokenDecoded.exp * 1000; 
-  //   const now = new Date().getTime(); 
-  //   const expiresIn = expirationTime - now;
-  
-  //   setTimeout(() => {
-  //     setToken(null);
-  //     setDecode(null);
-  //     localStorage.clear();
-  //   }, expiresIn);
-  // }
+
 
   function logout() {
     setToken(null);

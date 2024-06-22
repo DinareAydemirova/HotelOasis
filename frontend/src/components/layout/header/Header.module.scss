@@ -48,15 +48,23 @@
           box-shadow: 0 -3px 0px orange inset;
         }
 
-        .loinregister {
+        .loginregister {
           display: flex;
           align-items: center;
           gap: 15px;
 
-          a {
+          .link {
             display: flex;
             align-items: center;
             gap: 5px;
+            color: #383a4e;
+            font-family: "Jost", sans-serif;
+            font-size: 15px;
+            transition: 0.3s;
+
+            svg {
+              vertical-align: middle;
+            }
           }
         }
 
