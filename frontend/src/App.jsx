@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import GridLoader from 'react-spinners/GridLoader';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import GridLoader from "react-spinners/GridLoader";
 import Layout from "../src/components/layout/Index";
 import Home from "../src/components/pages/Home/Index";
 import Rooms from "../src/components/pages/Rooms/Index";
@@ -18,9 +18,8 @@ import ManageMenu from "./components/pages/AdminPanel/ManageMenu/Index";
 import ManageHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/Index";
 import ManageRestaurantGallery from "./components/pages/AdminPanel/ManageRestaurantGallery/Index";
 import ManageTeam from "./components/pages/AdminPanel/ManageTeam/Index";
-import ResetPssword from "./components/pages/ResetPassword/Index";
+import ResetPassword from "./components/pages/ResetPassword/Index";
 import ManageUsers from "./components/pages/AdminPanel/ManageUsers/Index";
-import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
 import EditRoom from "./components/pages/AdminPanel/ManageRooms/editRoom/Index";
 import EditRestaurant from "./components/pages/AdminPanel/ManageRestaurantGallery/editRestaurant/Index";
 import EditHotelGallery from "./components/pages/AdminPanel/ManageHotelGalery/editHotelGallery/Index";
@@ -33,16 +32,18 @@ import PostRooms from "./components/pages/AdminPanel/ManageRooms/postRooms/Index
 import PostMenu from "./components/pages/AdminPanel/ManageMenu/postMenu/Index";
 import PostHotelImage from "./components/pages/AdminPanel/ManageHotelGalery/postImage/Index";
 import PostRestaurantImage from "./components/pages/AdminPanel/ManageRestaurantGallery/postRestaurantImage/Index";
+import Page404 from "./components/pages/404Page/Index";
+import PrivateRoute from "./routes/PrivateRouter";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000); 
-
+      setUser({ role: "Admin" });
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -58,7 +59,7 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="rooms" element={<Rooms />} />
           <Route path="rooms/:id" element={<RoomDetail />} />
@@ -67,30 +68,34 @@ function App() {
           <Route path="restaurants" element={<Restaurants />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="resetpassword" element={<ResetPssword />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
+          <Route path="404" element={<Page404 />} />
+         
         </Route>
-        <Route path="/admin" element={<AdminPanel />}>
-          <Route index element={<Dashboard />} />
-          <Route path="rooms" element={<ManageRooms />} />
-          <Route path="menu" element={<ManageMenu />} />
-          <Route path="gallery" element={<ManageHotelImage />} />
-          <Route path="restaurant" element={<ManageRestaurantGallery />} />
-          <Route path="team" element={<ManageTeam />} />
-          <Route path="users" element={<ManageUsers />} />
-          <Route path="rooms/:id" element={<RoomDetailAdmin />} />
-          <Route path="menu/:id" element={<MenuDetail />} />
-          <Route path="team/:id" element={<TeamDetail />} />
-          <Route path="rooms/edit/:id" element={<EditRoom />} />
-          <Route path="restaurant/edit/:id" element={<EditRestaurant />} />
-          <Route path="gallery/edit/:id" element={<EditHotelGallery />} />
-          <Route path="menu/edit/:id" element={<EditMenu />} />
-          <Route path="team/edit/:id" element={<EditTeam />} />
-          <Route path="team/post" element={<PostTeamMember />} />
-          <Route path="rooms/post" element={<PostRooms />} />
-          <Route path="menu/post" element={<PostMenu />} />
-          <Route path="gallery/post" element={<PostHotelImage />} />
-          <Route path="restaurant/post" element={<PostRestaurantImage />} />
-        </Route>
+        <Route element={<PrivateRoute roles={["Admin"]} />}>
+            <Route path="admin/*" element={<AdminPanel />}>
+              <Route index element={<Dashboard />} />
+              <Route path="rooms" element={<ManageRooms />} />
+              <Route path="menu" element={<ManageMenu />} />
+              <Route path="gallery" element={<ManageHotelImage />} />
+              <Route path="restaurant" element={<ManageRestaurantGallery />} />
+              <Route path="team" element={<ManageTeam />} />
+              <Route path="users" element={<ManageUsers />} />
+              <Route path="rooms/:id" element={<RoomDetail />} />
+              <Route path="menu/:id" element={<MenuDetail />} />
+              <Route path="team/:id" element={<TeamDetail />} />
+              <Route path="rooms/edit/:id" element={<EditRoom />} />
+              <Route path="restaurant/edit/:id" element={<EditRestaurant />} />
+              <Route path="gallery/edit/:id" element={<EditHotelGallery />} />
+              <Route path="menu/edit/:id" element={<EditMenu />} />
+              <Route path="team/edit/:id" element={<EditTeam />} />
+              <Route path="team/post" element={<PostTeamMember />} />
+              <Route path="rooms/post" element={<PostRooms />} />
+              <Route path="menu/post" element={<PostMenu />} />
+              <Route path="gallery/post" element={<PostHotelImage />} />
+              <Route path="restaurant/post" element={<PostRestaurantImage />} />
+            </Route>
+          </Route>
       </Routes>
     </BrowserRouter>
   );

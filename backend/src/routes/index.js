@@ -5,7 +5,7 @@ const roomsController=require("../controllers/roomsController")
 const teamController=require("../controllers/teamController")
 const menuController=require("../controllers/menuController")
 const restaurantController=require("../controllers/restaureantController")
-
+const { verifyAccess } = require("../middleware/authMiddleware")
 
 
 router.get("/gallery", galleryController.getAllImages)

@@ -5,6 +5,8 @@ import { CiLogin } from 'react-icons/ci';
 import { IoPersonOutline } from 'react-icons/io5';
 import style from './Header.module.scss';
 import { UserContext } from '../../../context/userProvider'; 
+import { CiLogout } from "react-icons/ci";
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,14 +49,17 @@ const Header = () => {
               <div className={style.loginregister}>
                 {decode ? (
                   <>
-                    <li >
-                      <Link to="/" style={{display:"flex", alignItems:"center" , gap:"5px"}}><IoPersonOutline /> {decode.firstName}</Link>
-                    </li>
-                    <li style={{fontSize:"15px" , color:"#383a4e"}}>
+                   <li style={{fontSize:"15px" , color:"#383a4e", display:"flex", alignItems:"center" , gap:"5px"}}>
+                   <CiLogout />
+
                       <button onClick={logout}>
                        Logout
                       </button>
                     </li>
+                    <li >
+                      <Link to="/" style={{display:"flex", alignItems:"center" , gap:"5px"}}><IoPersonOutline /> {decode.firstName}</Link>
+                    </li>
+                   
                   </>
                 ) : (
                   <>
