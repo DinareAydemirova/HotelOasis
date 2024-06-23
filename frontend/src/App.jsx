@@ -35,6 +35,7 @@ import PostRestaurantImage from "./components/pages/AdminPanel/ManageRestaurantG
 import Page404 from "./components/pages/404Page/Index";
 import PrivateRoute from "./routes/PrivateRouter";
 import LinkToResetPassword from "./components/pages/ResetPassword/ResetPasswordLink/Index";
+import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -82,7 +83,7 @@ function App() {
               <Route path="restaurant" element={<ManageRestaurantGallery />} />
               <Route path="team" element={<ManageTeam />} />
               <Route path="users" element={<ManageUsers />} />
-              <Route path="rooms/:id" element={<RoomDetail />} />
+              <Route path="rooms/:id" element={<RoomDetailAdmin />} />
               <Route path="menu/:id" element={<MenuDetail />} />
               <Route path="team/:id" element={<TeamDetail />} />
               <Route path="rooms/edit/:id" element={<EditRoom />} />

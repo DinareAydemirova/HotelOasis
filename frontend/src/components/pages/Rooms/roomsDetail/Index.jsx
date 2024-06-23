@@ -12,6 +12,7 @@ const RoomDetail = () => {
     people: 0,
     images: [],
   });
+  const [mainImage, setMainImage] = useState("");
 
   const { id } = useParams();
 
@@ -19,9 +20,14 @@ const RoomDetail = () => {
     const fetchData = async () => {
       const res = await axios.get(`/rooms/${id}`);
       setData(res.data);
+      setMainImage(res.data.images[0]);
     };
     fetchData();
   }, [id]);
+
+  const handleImageClick = (img) => {
+    setMainImage(img);
+  };
 
   return (
     <div className={style.roomdetail}>
@@ -39,14 +45,14 @@ const RoomDetail = () => {
         <div className={style.booking}>
           <div className={style.roomimages}>
             <img
-              src={data.images[0]}
+              src={mainImage}
               alt={data.name}
               className={style.mainimage}
             />
             <div className={style.chilimages}>
-              {data.images.slice(1).map((img, index) => (
-                <div>
-                  <img key={index} src={img} alt={`Room image ${index + 1}`} />
+              {data.images.map((img, index) => (
+                <div key={index} onClick={() => handleImageClick(img)}>
+                  <img src={img} alt={`Room image ${index + 1}`} />
                 </div>
               ))}
             </div>
@@ -58,10 +64,8 @@ const RoomDetail = () => {
 
           <div className={style.book}>
             <div className={style.info}>
-            <p>Rating: {data.rate}</p>
-
+              <p>Rating: {data.rate}</p>
               <p>People: {data.people}</p>
-
               <div>
                 <h1>${data.price}</h1>
                 <p>per night</p>
@@ -73,7 +77,7 @@ const RoomDetail = () => {
               <label htmlFor="">Check out</label>
               <input type="date" name="" id="" />
               <div className={style.peoplecount}>
-                <label htmlFor="">people</label>
+                <label htmlFor="">People</label>
                 <select name="" id="">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -85,7 +89,7 @@ const RoomDetail = () => {
               <input type="text" name="" id="" />
               <div className={style.cartinfo}>
                 <div>
-                  <label htmlFor="">valid through</label>
+                  <label htmlFor="">Valid through</label>
                   <input type="text" name="" id="" placeholder="month/year" />
                 </div>
                 <div>
@@ -93,7 +97,7 @@ const RoomDetail = () => {
                   <input type="text" name="" id="" />
                 </div>
               </div>
-              <button>pay</button>
+              <button>Pay</button>
             </form>
           </div>
         </div>

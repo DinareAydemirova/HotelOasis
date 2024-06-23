@@ -79,7 +79,7 @@ const BestRooms = () => {
                     <p>per night / </p>
                   </div>
 
-                  <Link to={`/${elem._id}`}>
+                  <Link to={`/Rooms/${elem._id}`}>
                     <CiBookmark /> Book
                   </Link>
                 </div>
