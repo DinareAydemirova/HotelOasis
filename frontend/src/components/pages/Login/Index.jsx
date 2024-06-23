@@ -24,13 +24,14 @@ const Login = () => {
           password: values.password,
         }),
       });
-      const data = await response.json();
-      addToken(data);
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message);
+        throw new Error(errorData.message || "Login failed.");
       }
 
+      const data = await response.json();
+      addToken(data);
       resetForm();
       setError(null);
       navigate('/');
@@ -80,41 +81,46 @@ const Login = () => {
                       }}
                     >
                       <Form>
-                      <div className="relative mb-4">
-                            <Field
-                              type="email"
-                              name="email"
-                              className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-                              id="exampleFormControlInput3"
-                              placeholder="Email"
-                            />
-                            <ErrorMessage
-                              name="email"
-                              component="span"
-                              className="text-red-500 text-sm"
-                            />
-                          </div>
+                        <div className="relative mb-4">
+                          <Field
+                            type="email"
+                            name="email"
+                            className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                            id="exampleFormControlInput3"
+                            placeholder="Email"
+                          />
+                          <ErrorMessage
+                            name="email"
+                            component="span"
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
 
                         <div className="relative mb-4">
-                            <Field
-                              type={showPassword ? "text" : "password"}
-                              name="password"
-                              className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
-                              id="exampleFormControlInput5"
-                              placeholder="Password"
-                            />
-                            <span
-                              className="absolute right-3 top-2 cursor-pointer"
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? <FaEyeSlash /> : <FaEye />}
-                            </span>
-                            <ErrorMessage
-                              name="password"
-                              component="span"
-                              className="text-red-500 text-sm"
-                            />
+                          <Field
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear shadow-sm focus:shadow-md focus:border-cyan-500 dark:border-neutral-600 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary"
+                            id="exampleFormControlInput5"
+                            placeholder="Password"
+                          />
+                          <span
+                            className="absolute right-3 top-2 cursor-pointer"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                          </span>
+                          <ErrorMessage
+                            name="password"
+                            component="span"
+                            className="text-red-500 text-sm"
+                          />
+                        </div>
+                        {error && (
+                          <div className="mb-4 text-red-500 text-sm">
+                            {error}
                           </div>
+                        )}
                         <div className="mb-12 pb-1 pt-1 text-center">
                           <button
                             className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"

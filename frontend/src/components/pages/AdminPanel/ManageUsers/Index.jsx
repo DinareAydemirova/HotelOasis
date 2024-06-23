@@ -1,26 +1,109 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../../context/userProvider";
 
 const ManageUsers = () => {
-    const [data, setData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const navigate=useNavigate()
-  
-    useEffect(() => {
-      axios.get("/users").then((res) => {
+  const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get("/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
         setData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
       });
-    }, []);
-  
-    const filteredData = data.filter((users) =>
-      users.firstName.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  }, [token]);
+
+  const makeUserAdmin = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          role: "Admin",
+        }),
+      });
+      if (response.ok) {
+        setData((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === id ? { ...user, role: "Admin" } : user
+          )
+        );
+      } else {
+        console.error("Failed to update role to Admin");
+      }
+    } catch (error) {
+      console.error("Error updating role to Admin:", error);
+    }
+  };
+
+  const makeRoleUser = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          role: "User",
+        }),
+      });
+      if (response.ok) {
+        setData((prevUsers) =>
+          prevUsers.map((user) =>
+            user._id === id ? { ...user, role: "User" } : user
+          )
+        );
+      } else {
+        console.error("Failed to update role to User");
+      }
+    } catch (error) {
+      console.error("Error updating role to User:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        setData((prevUsers) =>
+          prevUsers.filter((user) => user._id !== id)
+        );
+      } else {
+        console.error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
+  const filteredData = data.filter((user) =>
+    user.firstName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
-       <Helmet>
+      <Helmet>
         <title>Admin Manage Users - kinsley</title>
         <link
           rel="shortcut icon"
@@ -28,79 +111,84 @@ const ManageUsers = () => {
           type="image/x-icon"
         />
       </Helmet>
-    <div className="p-4 flex justify-between">
-      <div className="flex gap-4">
-        <h1 className="text-3xl">Users</h1>
-
-        <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200">
-          Add new User
-        </button>
-      </div>
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <IoMdSearch className="text-gray-400" />
+      <div className="p-4 flex justify-between">
+        <div className="flex gap-4">
+          <h1 className="text-3xl">Users</h1>
         </div>
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
-        />
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <IoMdSearch className="text-gray-400" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
+          />
+        </div>
+      </div>
+      <div className="px-3 py-4 flex justify-center">
+        <table className="w-full text-md bg-white shadow-md rounded mb-4">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left p-3 px-5">User ID</th>
+              <th className="text-left p-3 px-5">First Name</th>
+              <th className="text-left p-3 px-5">Last name</th>
+              <th className="text-left p-3 px-5">Email</th>
+              <th className="text-left p-3 px-5">Role</th>
+              <th className="text-left p-3 px-5">Edit</th>
+              <th className="text-left p-3 px-5">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((user) => (
+              <tr
+                key={user._id}
+                className="border-b hover:bg-orange-100 bg-gray-100"
+              >
+                <td className="p-3 px-5">{user._id}</td>
+                <td className="p-3 px-5">{user.firstName}</td>
+                <td className="p-3 px-5">{user.lastName}</td>
+                <td className="p-3 px-5">{user.email}</td>
+                <td className="p-3 px-5">{user.role}</td>
+                <td className="p-3 px-5">
+                  <div className="flex justify-center">
+                    {user.role === "User" ? (
+                      <button
+                        className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => makeUserAdmin(user._id)}
+                      >
+                        Make Admin
+                      </button>
+                    ) : (
+                      <button
+                        className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        onClick={() => makeRoleUser(user._id)}
+                      >
+                        Make User
+                      </button>
+                    )}
+                  </div>
+                </td>
+                <td className="p-3 px-5">
+                  <div className="flex justify-center">
+                    <button
+                      type="button"
+                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => handleDelete(user._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-    <div className="px-3 py-4 flex justify-center">
-      <table className="w-full text-md bg-white shadow-md rounded mb-4">
-        <thead>
-          <tr className="border-b">
-          <th className="text-left p-3 px-5">User ID</th>
-            <th className="text-left p-3 px-5">First Name</th>
-            <th className="text-left p-3 px-5">Last name</th>
-            <th className="text-left p-3 px-5">Email</th>
-            <th className="text-left p-3 px-5">Role</th>
-            <th className="text-left p-3 px-5">Edit</th>
-            <th className="text-left p-3 px-5">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData?.map((elem) => (
-            <tr
-              key={elem.id}
-              className="border-b hover:bg-orange-100 bg-gray-100"
-            >
-              <td className="p-3 px-5">{elem._id}</td>
-              <td className="p-3 px-5">{elem.firstName}</td>
-              <td className="p-3 px-5">{elem.lastName}</td>
-              <td className="p-3 px-5">{elem.email}</td>
-              <td className="p-3 px-5">{elem.role}</td>
-              <td className="p-3 px-5">
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    className="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                  onClick={()=>navigate(`/admin/users/edit/${elem._id}`)}
-                  >
-                    Edit
-                  </button>
-                </div>
-              </td>
-              <td className="p-3 px-5">
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-  )
-}
+  );
+};
 
-export default ManageUsers
+export default ManageUsers;

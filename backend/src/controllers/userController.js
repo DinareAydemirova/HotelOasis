@@ -38,42 +38,21 @@ const deleteUser = async (req, res) => {
   res.send(user);
 };
 
-const updateUser = async (req, res, next) => {
-  const { id } = req.params;
-  const decoded = req.decoded;
-
-  const {
-    email,
-    firstName,
-    lastName,
-    role,
-  } = req.body;
-
-  const update = {
-    email,
-    firstName,
-    lastName,
-    role,
-  };
-
-  const user = await UserModel.findById(id);
-  if (!user) {
-    return res.status(404).send("User not found");
-  }
-  if (decoded.email !== user.email && decoded.role === "User") {
-    return res.status(403).send("You don't have access");
-  }
-
+const updateUser = async (req, res) => {
   try {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, update, {
-      new: true,
-    });
-
-    await updatedUser.save();
-    res.send(updatedUser);
+    const { id } = req.params;
+    const { role } = req.body;
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true } 
+    );
+    res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(500).json("Error updating user");
+    res.status(400).send(error.message);
   }
 };
+
+
 
 module.exports = { getAllUsers, getUserById, createUser, deleteUser, updateUser };

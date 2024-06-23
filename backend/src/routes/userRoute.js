@@ -6,8 +6,8 @@ const UserRouter = express.Router()
 
 UserRouter.get("/", getAllUsers)
 UserRouter.get("/:id", getUserById)
-UserRouter.post("/", verifyAccess(["Admin"]), createUser)
-UserRouter.put("/:id", verifyAccess(["Admin" , "User"]), updateUser)
+UserRouter.post("/", verifyAccess(["Admin","User"]), createUser)
+UserRouter.put("/:id", verifyAccess(["Admin"]), updateUser);
 UserRouter.delete("/:id", verifyAccess(["Admin"]), deleteUser);
 
 module.exports = UserRouter
