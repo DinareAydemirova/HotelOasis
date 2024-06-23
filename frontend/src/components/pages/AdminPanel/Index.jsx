@@ -7,13 +7,16 @@ import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { AiOutlineTeam } from "react-icons/ai";
 
 
+
 function AdminPanel() {
   const [showGalleryLinks, setShowGalleryLinks] = useState(false);
   const location = useLocation();
 
+
   const toggleGalleryLinks = () => {
     setShowGalleryLinks(!showGalleryLinks);
   };
+
 
   return (
     <div className="flex min-h-screen">

@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const ManageMenu = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(10); 
   const navigate= useNavigate()
 
   useEffect(() => {
@@ -27,6 +31,16 @@ const ManageMenu = () => {
   const filteredData = data.filter((menu) =>
     menu.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const paginatedData = filteredData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
        <Helmet>
@@ -73,7 +87,7 @@ const ManageMenu = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData?.map((elem) => (
+            {paginatedData?.map((elem) => (
               <tr
                 key={elem.id}
                 className="border-b hover:bg-orange-100 bg-gray-100"
@@ -121,6 +135,16 @@ const ManageMenu = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center my-4 pb-8">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredData.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Stack>
       </div>
     </div>
   );

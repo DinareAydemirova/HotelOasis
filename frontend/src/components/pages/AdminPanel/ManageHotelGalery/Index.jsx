@@ -2,10 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const ManageHotelImage = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(10); 
 
   useEffect(() => {
     axios.get("/gallery").then((res) => {
@@ -21,6 +25,16 @@ const ManageHotelImage = () => {
       console.error("There was an error deleting the image!",error)
     })
   }
+
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+  const paginatedData = data.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
+
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
       <Helmet>
@@ -51,7 +65,7 @@ const ManageHotelImage = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((elem) => (
+              {paginatedData?.map((elem) => (
                 <tr
                   key={elem.id}
                   className="border-b hover:bg-orange-100 bg-gray-100"
@@ -89,6 +103,16 @@ const ManageHotelImage = () => {
             </tbody>
           </table>
         </div>
+        <div className="flex justify-center my-4 pb-8">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(data.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Stack>
+      </div>
       </div>
     </div>
   );

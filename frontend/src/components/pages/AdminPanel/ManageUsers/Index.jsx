@@ -3,11 +3,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 import { UserContext } from "../../../../context/userProvider";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const ManageUsers = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { token } = useContext(UserContext);
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(10); 
 
   useEffect(() => {
     axios
@@ -101,6 +105,14 @@ const ManageUsers = () => {
     user.firstName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const paginatedData = filteredData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
       <Helmet>
@@ -142,7 +154,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((user) => (
+            {paginatedData.map((user) => (
               <tr
                 key={user._id}
                 className="border-b hover:bg-orange-100 bg-gray-100"
@@ -186,6 +198,16 @@ const ManageUsers = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center my-4 pb-8">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredData.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Stack>
       </div>
     </div>
   );

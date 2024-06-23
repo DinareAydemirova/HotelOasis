@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const ManageTeam = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate= useNavigate()
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(5);
 
   useEffect(() => {
     axios.get("/team").then((res) => {
@@ -28,6 +32,16 @@ const ManageTeam = () => {
       .catch((error) => {
         console.error("There was an error deleting the menu!", error);
       });
+  };
+
+  
+  const paginatedData = filteredData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
   };
 
   return (
@@ -77,7 +91,7 @@ const ManageTeam = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData?.map((elem) => (
+            {paginatedData?.map((elem) => (
               <tr
                 key={elem.id}
                 className="border-b hover:bg-orange-100 bg-gray-100"
@@ -125,6 +139,16 @@ const ManageTeam = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center my-4 pb-8">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredData.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Stack>
       </div>
     </div>
   );

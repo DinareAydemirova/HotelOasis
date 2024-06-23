@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { IoMdSearch } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const ManageRooms = () => {
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(8); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +34,15 @@ const ManageRooms = () => {
     room.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const paginatedData = filteredData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage
+  );
+
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <div className="text-gray-900 bg-gray-200 min-h-screen">
       <Helmet>
@@ -44,7 +57,7 @@ const ManageRooms = () => {
         <div className="flex gap-4">
           <h1 className="text-3xl">Rooms</h1>
           <button className="px-4 py-2 text-black backdrop-blur-sm border border-black rounded-md hover:shadow-[0px_0px_4px_4px_rgba(0,0,0,0.1)] bg-white/[0.2] text-sm transition duration-200"
-          onClick={()=>navigate("/admin/rooms/post")}
+            onClick={() => navigate("/admin/rooms/post")}
           >
             Add new room
           </button>
@@ -77,7 +90,7 @@ const ManageRooms = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData?.map((elem) => (
+            {paginatedData.map((elem) => (
               <tr
                 key={elem._id}
                 className="border-b hover:bg-orange-100 bg-gray-100"
@@ -125,6 +138,16 @@ const ManageRooms = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center my-4 pb-8">
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredData.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+          />
+        </Stack>
       </div>
     </div>
   );
