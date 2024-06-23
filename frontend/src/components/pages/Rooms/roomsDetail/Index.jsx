@@ -51,7 +51,11 @@ const RoomDetail = () => {
             />
             <div className={style.chilimages}>
               {data.images.map((img, index) => (
-                <div key={index} onClick={() => handleImageClick(img)}>
+                <div
+                  key={index}
+                  onClick={() => handleImageClick(img)}
+                  className={mainImage === img ? style.active : ""}
+                >
                   <img src={img} alt={`Room image ${index + 1}`} />
                 </div>
               ))}

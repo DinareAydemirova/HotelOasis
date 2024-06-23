@@ -54,18 +54,24 @@
         .chilimages {
           display: flex;
           flex-wrap: wrap;
-          gap: 4px;
+          gap: 2px;
           padding: 4px 0;
+          div {
+            cursor: pointer;
+          }
           img {
             max-width: 197px;
           }
         }
-        h3{
-            font-weight: 600;
+        .active {
+          border: 2px solid orange;
         }
-        p{
-            font-size: 16px;
-             color: #383a4e;
+        h3 {
+          font-weight: 600;
+        }
+        p {
+          font-size: 16px;
+          color: #383a4e;
         }
       }
       .book {
@@ -91,44 +97,43 @@
               color: #383a4e;
               font-weight: 400;
             }
-          
           }
         }
-        form{
-            padding: 20px;
-            background-color: white;
+        form {
+          padding: 20px;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          input {
+            background-color: #f1ffff;
+            border-radius: 8px;
+            color: #383a4e71;
+            padding: 10px;
+          }
+          label {
+            font-size: 16px;
+            color: #383a4e;
+          }
+          .peoplecount {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            input{
-                background-color:  #f1ffff;
-                border-radius: 8px;
-                color: #383a4e71;
-                padding: 10px;
+            select {
+              background-color: #f1ffff;
+              font-size: 16px;
+              padding: 10px;
             }
-            label{
-                font-size: 16px;
-                color: #383a4e;
-            }
-            .peoplecount{
-                display: flex;
-                flex-direction: column;
-                select{
-                    background-color: #f1ffff;
-                    font-size: 16px;
-                    padding: 10px;
-                }
-            }
-            .cartinfo{
-                display: flex;
-                gap: 5px;
-            }
-            button{
-                padding: 5px 10px;
-                background-color:  #3b61dd;
-                color: white;
-                border-radius: 8px;
-            }
+          }
+          .cartinfo {
+            display: flex;
+            gap: 5px;
+          }
+          button {
+            padding: 5px 10px;
+            background-color: #3b61dd;
+            color: white;
+            border-radius: 8px;
+          }
         }
       }
     }
@@ -137,7 +142,7 @@
 
 @media only screen and (max-width: 1340px) {
   .booking {
-    grid-template-columns: 1fr !important; 
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -145,34 +150,34 @@
   .booking {
     .roomimages {
       .mainimage {
-        max-width: 100% !important; 
+        max-width: 100% !important;
       }
       .chilimages img {
-        max-width: 100% !important; 
+        max-width: 100% !important;
       }
     }
   }
 }
 @media only screen and (max-width: 480px) {
   .heading h1 {
-    font-size: 48px !important; 
+    font-size: 48px !important;
   }
   .booking {
     .roomimages {
       .mainimage {
-        max-width: 100% !important; 
+        max-width: 100% !important;
       }
       .chilimages img {
-        max-width: 100% !important; 
+        max-width: 100% !important;
       }
     }
     .book {
       form {
-        input, select {
-          width: 100% !important; 
+        input,
+        select {
+          width: 100% !important;
         }
       }
     }
   }
 }
-
