@@ -36,6 +36,7 @@ import Page404 from "./components/pages/404Page/Index";
 import PrivateRoute from "./routes/PrivateRouter";
 import LinkToResetPassword from "./components/pages/ResetPassword/ResetPasswordLink/Index";
 import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
+import Profile from "./components/pages/Profile/Index";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -73,6 +74,7 @@ function App() {
           <Route path="resetpassword" element={<ResetPassword />} />
           <Route path="linktoresetpassword" element={<LinkToResetPassword />} />
           <Route path="*" element={<Page404 />} />
+          <Route path="profile/users/:id" element={<Profile />} />
         </Route>
         <Route element={<PrivateRoute roles={["Admin"]} />}>
             <Route path="admin/*" element={<AdminPanel />}>

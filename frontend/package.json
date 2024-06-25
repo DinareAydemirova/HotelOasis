@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.20",
     "@reduxjs/toolkit": "^2.2.5",
     "@splidejs/react-splide": "^0.7.12",
+    "antd": "^5.18.3",
     "axios": "^1.7.2",
     "emailjs": "^4.0.3",
     "formik": "^2.4.6",

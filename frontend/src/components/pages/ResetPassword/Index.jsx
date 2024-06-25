@@ -10,13 +10,12 @@ const ResetPassword = () => {
   const sendEmail = (values) => {
     const templateParams = {
       from_email: values.email,
+      to_email: values.email,
       to_name: "Kinsley team",
     };
 
     emailjs
-      .send("service_482r9gp", "template_43000fy", templateParams, {
-        publicKey: "B0TWgyT1gV8R_WZiW",
-      })
+      .send("service_dhp5dpe", "template_43000fy", templateParams, "B0TWgyT1gV8R_WZiW")
       .then(
         (response) => {
           console.log("SUCCESS!", response.status, response.text);

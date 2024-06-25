@@ -1,34 +1,37 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { CiLogin } from 'react-icons/ci';
+import { CiLogin, CiLogout } from 'react-icons/ci';
 import { IoPersonOutline } from 'react-icons/io5';
 import style from './Header.module.scss';
 import { UserContext } from '../../../context/userProvider'; 
-import { CiLogout } from "react-icons/ci";
-
+import axios from 'axios';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const { decode, logout } = useContext(UserContext); 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (decode) {
+      axios.get(`/users/${decode._id}`)
+        .then(res => setUser(res.data))
+        .catch(err => console.error(err));
+    }
+  }, [decode]);
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const isActive = (path) => {
-    return location.pathname === path ? style.active : '';
-  };
+  const isActive = (path) => location.pathname === path ? style.active : '';
 
   return (
     <div className={style.navbar}>
       <div className={style.container}>
         <div className={style.navigation}>
-          <img
-            src="https://kinsley.bslthemes.com/wp-content/uploads/2021/11/logo.png"
-            alt="Logo"
-          />
+          <img src="https://kinsley.bslthemes.com/wp-content/uploads/2021/11/logo.png" alt="Logo" />
           <div className={style.pages}>
             <ul className={menuOpen ? style.open : ''}>
               <li className={isActive('/')}>
@@ -49,28 +52,26 @@ const Header = () => {
               <div className={style.loginregister}>
                 {decode ? (
                   <>
-                   <li style={{fontSize:"15px" , color:"#383a4e", display:"flex", alignItems:"center" , gap:"5px"}}>
-                   <CiLogout />
-
-                      <button onClick={logout}>
-                       Logout
-                      </button>
+                    <li className={style.logout} style={{fontSize:"15px" , color:"#383a4e", display:"flex", alignItems:"center" , gap:"5px"}}>
+                      <CiLogout />
+                      <button onClick={logout}>Logout</button>
                     </li>
-                    <li >
-                      <Link to="/" style={{display:"flex", alignItems:"center" , gap:"5px"}}><IoPersonOutline /> {decode.firstName}</Link>
+                    <li>
+                      <Link to="/profile" style={{display:"flex", alignItems:"center" , gap:"5px"}}>
+                        <IoPersonOutline /> {decode.firstName}
+                      </Link>
                     </li>
-                   
                   </>
                 ) : (
                   <>
                     <li className={isActive('/login')}>
                       <Link to="/login" style={{display:"flex", alignItems:"center", gap:"5px"}}>
-                       <p> Log in</p> <CiLogin />
+                        <p>Log in</p> <CiLogin />
                       </Link>
                     </li>
                     <li className={isActive('/register')}>
                       <Link to="/register" style={{display:"flex", alignItems:"center", gap:"5px"}}>
-                       <p> Sign Up</p> <IoPersonOutline />
+                        <p>Sign Up</p> <IoPersonOutline />
                       </Link>
                     </li>
                   </>

@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile {
+  letter-spacing: 1px;
+  background-color: #f1ffff;
+  padding: 150px 0 0 0;
+  font-family: "Jost", sans-serif;
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    h1{
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+}
