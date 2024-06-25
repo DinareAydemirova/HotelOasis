@@ -3,6 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import style from "../roomsDetail/detail.module.scss";
 import axios from "axios";
+import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import dayjs from "dayjs";
 
 const RoomDetail = () => {
   const [data, setData] = useState({
@@ -13,6 +16,8 @@ const RoomDetail = () => {
     images: [],
   });
   const [mainImage, setMainImage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const { id } = useParams();
 
@@ -27,6 +32,19 @@ const RoomDetail = () => {
 
   const handleImageClick = (img) => {
     setMainImage(img);
+  };
+
+  const handleBookClick = (values) => {
+    const checkInDate = dayjs(values.checkIn);
+    const checkOutDate = dayjs(values.checkOut);
+    const numberOfDays = checkOutDate.diff(checkInDate, "day");
+    const total = numberOfDays * data.price;
+    setTotalPrice(total);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -44,11 +62,7 @@ const RoomDetail = () => {
         </div>
         <div className={style.booking}>
           <div className={style.roomimages}>
-            <img
-              src={mainImage}
-              alt={data.name}
-              className={style.mainimage}
-            />
+            <img src={mainImage} alt={data.name} className={style.mainimage} />
             <div className={style.chilimages}>
               {data.images.map((img, index) => (
                 <div
@@ -75,37 +89,130 @@ const RoomDetail = () => {
                 <p>per night</p>
               </div>
             </div>
-            <form action="" className={style.form}>
-              <label htmlFor="">Check in</label>
-              <input type="date" name="" id="" />
-              <label htmlFor="">Check out</label>
-              <input type="date" name="" id="" />
-              <div className={style.peoplecount}>
-                <label htmlFor="">People</label>
-                <select name="" id="">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-              <label htmlFor="">Card number</label>
-              <input type="text" name="" id="" />
-              <div className={style.cartinfo}>
-                <div>
-                  <label htmlFor="">Valid through</label>
-                  <input type="text" name="" id="" placeholder="month/year" />
+            <Formik
+              initialValues={{ checkIn: "", checkOut: "" }}
+              validationSchema={Yup.object({
+                checkIn: Yup.date().required("Check-in date is required"),
+                checkOut: Yup.date().required("Check-out date is required"),
+              })}
+              onSubmit={(values) => {
+                handleBookClick(values);
+              }}
+            >
+              <Form className={style.form}>
+                <div className="flex flex-col">
+                  <label htmlFor="checkIn">Check in</label>
+                  <Field type="date" name="checkIn" />
+                  <ErrorMessage
+                    name="checkIn"
+                    component="span"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
-                <div>
-                  <label htmlFor="">CVC code</label>
-                  <input type="text" name="" id="" />
+                <div className="flex flex-col">
+                  <label htmlFor="checkOut">Check out</label>
+                  <Field type="date" name="checkOut" />
+                  <ErrorMessage
+                    name="checkOut"
+                    component="span"
+                    className="text-red-500 text-sm"
+                  />
                 </div>
-              </div>
-              <button>Pay</button>
-            </form>
+                <button type="submit">Pay</button>
+              </Form>
+            </Formik>
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div className={style.modalBackdrop}>
+          <div className={style.modalContent}>
+            <button className={style.closeButton} onClick={handleCloseModal}>
+              X
+            </button>
+           
+            <Formik
+              initialValues={{
+                email: "",
+                cardNumber: "",
+                validThrough: "",
+                cvc: "",
+              }}
+              validationSchema={Yup.object({
+                email: Yup.string()
+                  .required("Email is required")
+                  .email("Invalid email address"),
+                cardNumber: Yup.string()
+                  .length(16, "Must be 16 digits long")
+                  .required("Card number is required"),
+                validThrough: Yup.string().required("Valid through is required"),
+                cvc: Yup.string().required("CVC is required"),
+              })}
+              onSubmit={(values) => {
+                
+              }}
+            >
+              <Form action="" className={style.modalForm}>
+                <div className="flex flex-col">
+                  <label htmlFor="email">Your Email</label>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className="text-red-500 text-sm"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="cardNumber">Card number</label>
+                  <Field
+                    type="text"
+                    name="cardNumber"
+                    id="cardNumber"
+                    placeholder="**** **** **** ****"
+                  />
+                  <ErrorMessage
+                    name="cardNumber"
+                    component="span"
+                    className="text-red-500 text-sm"
+                  />
+                </div>
+                <div className={style.cartinfo}>
+                  <div className="flex flex-col">
+                    <label htmlFor="validThrough">Valid through</label>
+                    <Field
+                      type="month"
+                      name="validThrough"
+                      id="validThrough"
+                      placeholder="MM/YYYY"
+                    />
+                    <ErrorMessage
+                      name="validThrough"
+                      component="span"
+                      className="text-red-500 text-sm"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="cvc">CVC code</label>
+                    <Field type="text" name="cvc" id="cvc" placeholder="cvc" />
+                    <ErrorMessage
+                      name="cvc"
+                      component="span"
+                      className="text-red-500 text-sm"
+                    />
+                  </div>
+                </div>
+                <button type="submit" className="bg-green"> ${totalPrice}</button>
+              </Form>
+            </Formik>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
