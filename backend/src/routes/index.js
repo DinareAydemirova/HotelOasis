@@ -5,8 +5,7 @@ const roomsController=require("../controllers/roomsController")
 const teamController=require("../controllers/teamController")
 const menuController=require("../controllers/menuController")
 const restaurantController=require("../controllers/restaureantController")
-const { verifyAccess } = require("../middleware/authMiddleware")
-
+const bookingController=require("../controllers/bookingController")
 
 router.get("/gallery", galleryController.getAllImages)
 router.post("/gallery", galleryController.postImages)
@@ -37,12 +36,13 @@ router.delete("/menu/:id", menuController.deleteMealById)
 router.patch("/menu/:id", menuController.patchgMealId)
 router.put("/menu/:id", menuController.putMealById)
 
-router.get("/restaurant", restaurantController.getAllImages)
-router.post("/restaurant", restaurantController.postImages)
-router.get("/restaurant/:id", restaurantController.getImageById)
-router.delete("/restaurant/:id", restaurantController.deleteImageById)
-router.patch("/restaurant/:id", restaurantController.patchgImageId)
-router.put("/restaurant/:id", restaurantController.putImageyById)
+router.get("/booking", bookingController.getAllBookings)
+router.post("/booking", bookingController.postBooking)
+router.get("/booking/:id", bookingController.getBookingById)
+router.delete("/booking/:id", bookingController.deleteBookingById)
+router.patch("/booking/:id", bookingController.patchgBookingId)
+router.put("/booking/:id", bookingController.putBookingById)
+
 
 
 
