@@ -1,12 +1,11 @@
 const mongoose = require("mongoose")
 
 const bookingSchema = mongoose.Schema({
+    roomid:{type:String, required:true},
 	checkIn: {type: Date, require:true},
     checkOut: {type: Date, require:true},
-    email:{type: String, require:true},
-    cardNumber: { type: Number, required: true },
-    validThrough:{ type: Date, required: true },
-    cvc:{type: Number, required: true}
+    totalAmount:{type:Number, required:true},
+    status:{type:String, required:true , default:"Booked"},
 })
 
 module.exports = mongoose.model("Booking", bookingSchema)

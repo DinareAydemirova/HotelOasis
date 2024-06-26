@@ -23,6 +23,12 @@ export default defineConfig({
       },
       "/users":{
         target:"http://localhost:3000"
+      },
+      "/booking":{
+        target:"http://localhost:3000"
+      },
+      "/reservation":{
+        target:"http://localhost:3000"
       }
     }
   }

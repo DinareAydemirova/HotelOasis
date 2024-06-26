@@ -37,6 +37,8 @@ import PrivateRoute from "./routes/PrivateRouter";
 import LinkToResetPassword from "./components/pages/ResetPassword/ResetPasswordLink/Index";
 import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
 import Profile from "./components/pages/Profile/Index";
+import TableReservation from "./components/pages/AdminPanel/TableReservation/Index";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -64,7 +66,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="rooms" element={<Rooms />} />
+          <Route path="Rooms" element={<Rooms />} />
           <Route path="rooms/:id" element={<RoomDetail />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -82,9 +84,10 @@ function App() {
               <Route path="rooms" element={<ManageRooms />} />
               <Route path="menu" element={<ManageMenu />} />
               <Route path="gallery" element={<ManageHotelImage />} />
-              <Route path="restaurant" element={<ManageRestaurantGallery />} />
+              <Route path="Restaurant" element={<ManageRestaurantGallery />} />
               <Route path="team" element={<ManageTeam />} />
               <Route path="users" element={<ManageUsers />} />
+              <Route path="reservation" element={<TableReservation />} />
               <Route path="rooms/:id" element={<RoomDetailAdmin />} />
               <Route path="menu/:id" element={<MenuDetail />} />
               <Route path="team/:id" element={<TeamDetail />} />

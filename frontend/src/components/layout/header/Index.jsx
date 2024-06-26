@@ -40,11 +40,11 @@ const Header = () => {
               <li className={isActive('/about')}>
                 <Link to="/about">About</Link>
               </li>
-              <li className={isActive('/rooms')}>
-                <Link to="/rooms">Rooms</Link>
+              <li className={isActive('/Rooms')}>
+                <Link to="/Rooms">Rooms</Link>
               </li>
-              <li className={isActive('/restaurants')}>
-                <Link to="/restaurants">Restaurant</Link>
+              <li className={isActive('/Restaurants')}>
+                <Link to="/Restaurants">Restaurant</Link>
               </li>
               <li className={isActive('/contact')}>
                 <Link to="/contact">Contact</Link>
