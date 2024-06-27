@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.skeletonContainer {
+  display: flex ; 
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 1300px;
+  margin: 0 auto;
+  .skeleton {
+    flex: 1 1 300px; 
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: loading 1.5s infinite;
+    }
+  
+    &.skeletonImage {
+      height: 200px;
+      background-color: #f0f0f0;
+    }
+  
+    &.skeletonText {
+      height: 20px;
+      background-color: #f5f5f5;
+      margin: 10px 0;
+    }
+  
+    &.skeletonDescription {
+      height: 16px;
+      background-color: #f5f5f5;
+      margin: 10px 0;
+    }
+  }
+}
+
+
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

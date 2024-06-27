@@ -215,8 +215,8 @@ const RoomDetail = () => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-                <div className="flex gap-3">
-                  <div className="flex flex-col">
+                <div className="flex gap-3 flex-wrap">
+                  <div className="flex flex-col ">
                     <label htmlFor="validThrough">Valid through</label>
                     <Field
                       type="month"

@@ -6,11 +6,15 @@ import { Navigation, A11y } from "swiper/modules";
 import axios from "axios";
 import "swiper/css";
 import "swiper/css/navigation";
+import SkeletonLoader from "../../../../skeletonLoader/Index";
+
 
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
   const [data, setData] = useState([]);
+  const [lightboxImage, setLightboxImage] = useState(null);
+  const [loading, setLoading] = useState(true);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -19,6 +23,14 @@ const Gallery = () => {
       setData(res.data);
     });
   }, []);
+
+  const openLightbox = (image) => {
+    setLightboxImage(image);
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
 
   return (
     <div className={style.gallerySec}>
@@ -32,6 +44,9 @@ const Gallery = () => {
             illo odio.
           </p>
         </div>
+        {loading ? (
+          <SkeletonLoader /> 
+        ) : (
         <div className={style.swiper}>
           <Swiper
             className={style.images}
@@ -68,7 +83,7 @@ const Gallery = () => {
             {data?.map((elem) => {
               return (
                 <SwiperSlide>
-                  <img src={elem.image} alt="Slide 1" />
+                  <img src={elem.image} alt="Slide 1"  onClick={() => openLightbox(elem.image)}/>
                 </SwiperSlide>
               );
             })}
@@ -85,6 +100,7 @@ const Gallery = () => {
             </div>
           </div>
         </div>
+        )}
         <div className={style.features}>
           <div>
             <span>400+</span>
@@ -104,6 +120,11 @@ const Gallery = () => {
           </div>
         </div>
       </div>
+      {lightboxImage && (
+        <div className={style.lightbox} onClick={closeLightbox}>
+          <img src={lightboxImage} alt="Lightbox" />
+        </div>
+      )}
     </div>
   );
 };

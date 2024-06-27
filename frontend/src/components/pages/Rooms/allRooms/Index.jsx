@@ -62,24 +62,32 @@ const AllRooms = () => {
           </button>
         </div>
         <div className={style.rooms}>
-          {filteredData.slice(0, visible).map((elem, index) => (
-            <div key={elem._id} className={style.room}>
-              <img src={elem.images[0]} alt={elem.name} />
-              <h2>{elem.name}</h2>
-              <p>{elem.description.slice(0, 90)}...</p>
-              <div className={style.booking}>
-                <div className={style.pricing}>
-                  <h1>${elem.price}</h1>
-                  <p>per night</p>
+        
+            {filteredData.slice(0, visible).map((elem) => (
+              <Link
+                to={`/Rooms/${elem._id}`}
+                key={elem._id}
+                className={style.roomLink}
+              >
+                <div key={elem._id} className={style.room}>
+                  <img src={elem.images[0]} alt={elem.name} />
+                  <h2>{elem.name}</h2>
+                  <p>{elem.description.slice(0, 90)}...</p>
+                  <div className={style.booking}>
+                    <div className={style.pricing}>
+                      <h1>${elem.price}</h1>
+                      <p>per night</p>
+                    </div>
+                    <Link to={`/Rooms/${elem._id}`}>
+                      <CiBookmark /> Book
+                    </Link>
+                  </div>
                 </div>
-                <Link to={`/Rooms/${elem._id}`}>
-                  <CiBookmark /> Book
-                </Link>
-              </div>
-            </div>
-          ))}
+              </Link>
+            )
+          )}
         </div>
-        {visible < filteredData.length && (
+        {visible < filteredData.length && !loading && (
           <div className={style.load}>
             <button className={style.loadMore} onClick={showMoreItems}>
               Load more
@@ -90,5 +98,4 @@ const AllRooms = () => {
     </div>
   );
 };
-
 export default AllRooms;

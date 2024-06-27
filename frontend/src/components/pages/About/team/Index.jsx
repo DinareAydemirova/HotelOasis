@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import style from "../team/Team.module.scss";
-import { FaFacebookF } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import axios from "axios";
+import SkeletonLoader from "../../../../skeletonLoader/Index";
 
 const Team = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get("/team").then((res) => {
       setData(res.data);
+      setLoading(false);
     });
   }, []);
 
@@ -30,34 +30,33 @@ const Team = () => {
           </p>
         </div>
 
-        <div className={style.teamMembers}>
-          {filteredData?.map((elem) => {
-           return(
-            <div className={style.member} key={elem._id}>
-            <img
-              src={elem.image}
-              alt=""
-            />
-            <h3>{elem.fullname}</h3>
-            <p>{elem.position}</p>
-            <div className={style.social}>
-              <div>
-                <FaFacebookF />
+        {loading ? (
+          <SkeletonLoader /> 
+        ) : (
+          <div className={style.teamMembers}>
+            {filteredData?.map((elem) => (
+              <div className={style.member} key={elem._id}>
+                <img src={elem.image} alt="" />
+                <h3>{elem.fullname}</h3>
+                <p>{elem.position}</p>
+                <div className={style.social}>
+                  <div>
+                    <FaFacebookF />
+                  </div>
+                  <div>
+                    <FaInstagram />
+                  </div>
+                  <div>
+                    <FaTwitter />
+                  </div>
+                  <div>
+                    <FaYoutube />
+                  </div>
+                </div>
               </div>
-              <div>
-                <FaInstagram />
-              </div>
-              <div>
-                <FaTwitter />
-              </div>
-              <div>
-                <FaYoutube />
-              </div>
-            </div>
+            ))}
           </div>
-           )
-          })}
-        </div>
+        )}
       </div>
     </div>
   );

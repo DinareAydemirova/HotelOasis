@@ -8,11 +8,13 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import axios from "axios";
 import "swiper/css";
 import "swiper/css/navigation";
+import SkeletonLoader from "../../../../skeletonLoader/Index";
 
 const BestRooms = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [totalSlides, setTotalSlides] = useState(0);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -20,6 +22,7 @@ const BestRooms = () => {
     axios.get("/rooms").then((res) => {
       const filteredRooms = res.data.filter(room => room.rate === 5);
       setData(filteredRooms);
+      setLoading(false);
     });
   }, []);
 
@@ -35,59 +38,64 @@ const BestRooms = () => {
             illo odio.
           </p>
         </div>
-        <Swiper
-          className={style.rooms}
-          modules={[Navigation, A11y]}
-          spaceBetween={20}
-          slidesPerView={3}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onSwiper={(swiper) => {
-            setTotalSlides(swiper.slides.length - 1);
-            setTimeout(() => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.destroy();
-              swiper.navigation.init();
-              swiper.navigation.update();
-            });
-          }}
-          onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
-          breakpoints={{
-            0: {
-              slidesPerView: 1,
-            },
-            600: {
-              slidesPerView: 2,
-            },
-            800: {
-              slidesPerView: 3,
-            },
-          }}
-        >
-          {data?.map((elem, index) => {
-            return (
+        {loading ? (
+          <SkeletonLoader /> 
+        ) : (
+          <Swiper
+            className={style.rooms}
+            modules={[Navigation, A11y]}
+            spaceBetween={20}
+            slidesPerView={3}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onSwiper={(swiper) => {
+              setTotalSlides(swiper.slides.length - 1);
+              setTimeout(() => {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.destroy();
+                swiper.navigation.init();
+                swiper.navigation.update();
+              });
+            }}
+            onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              600: {
+                slidesPerView: 2,
+              },
+              800: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {data?.map((elem, index) => (
               <SwiperSlide className={style.room} key={index}>
-                <img src={elem.images[0]} alt="" />
-                <h2>{elem.name}</h2>
-                <p>{elem.description.slice(0, 90)}...</p>
-                <div className={style.booking}>
-                  <div className={style.pricing}>
-                    <h1>${elem.price}</h1>
-                    <p>per night / </p>
+                <Link to={`/Rooms/${elem._id}`}>
+                  <div className={style.imageWrapper}>
+                    <img src={elem.images[0]} alt="" />
                   </div>
-
-                  <Link to={`/Rooms/${elem._id}`}>
-                    <CiBookmark /> Book
-                  </Link>
-                </div>
+                  <h2>{elem.name}</h2>
+                  <p>{elem.description.slice(0, 90)}...</p>
+                  <div className={style.booking}>
+                    <div className={style.pricing}>
+                      <h1>${elem.price}</h1>
+                      <p>per night</p>
+                    </div>
+                    <Link to={`/Rooms/${elem._id}`}>
+                      <CiBookmark /> Book
+                    </Link>
+                  </div>
+                </Link>
               </SwiperSlide>
-            );
-          })}
-        </Swiper>
-
+            ))}
+          </Swiper>
+        )}
+        
         <div className={style.swipe}>
           <div className={style.count}>
             {currentSlide}/{data.length}
