@@ -31,12 +31,14 @@ const Team = () => {
         </div>
 
         {loading ? (
-          <SkeletonLoader /> 
+          <SkeletonLoader />
         ) : (
           <div className={style.teamMembers}>
             {filteredData?.map((elem) => (
               <div className={style.member} key={elem._id}>
-                <img src={elem.image} alt="" />
+                <div className={style.imageWrapper}>
+                  <img src={elem.image} alt="" />
+                </div>
                 <h3>{elem.fullname}</h3>
                 <p>{elem.position}</p>
                 <div className={style.social}>

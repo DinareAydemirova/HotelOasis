@@ -55,10 +55,19 @@
           font-weight: 400;
           color: #64688c;
         }
-        img {
+        .imageWrapper {
+          overflow: hidden;
           border-radius: 10px;
-          height: 350px;
+          img {
+            border-radius: 10px;
+            height: 350px;
+            transition: transform 0.5s ease-in-out;
+          }
+          img:hover {
+            transform: scale(1.1);
+          }
         }
+      
         .social {
           display: flex;
 

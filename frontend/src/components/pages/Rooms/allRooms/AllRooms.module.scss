@@ -41,6 +41,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 15px;
+    
       .room {
         padding: 20px;
         background-color: white;
@@ -51,6 +52,7 @@
         flex-direction: column;
         gap: 15px;
         transition: transform 0.3s;
+        max-height: 400px;
       }
       .room:hover {
         transform: translateY(-5px);

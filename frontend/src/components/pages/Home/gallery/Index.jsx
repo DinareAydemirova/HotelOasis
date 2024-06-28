@@ -13,15 +13,62 @@ const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [lightboxImage, setLightboxImage] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [hotels, setHotels] = useState(0);
+  const [rooms, setRooms] = useState(0);
+  const [beaches, setBeaches] = useState(0);
+  const [guests, setGuests] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const featuresRef = useRef(null);
 
   useEffect(() => {
     axios.get("/gallery").then((res) => {
       setData(res.data);
       setLoading(false);
     });
-  }, []);
+
+    const incrementCounts = () => {
+      incrementValue(4, setHotels);
+      incrementValue(127, setRooms);
+      incrementValue(6, setBeaches);
+      incrementValue(4586, setGuests);
+    };
+
+    const incrementValue = (finalValue, setter) => {
+      let currentValue = 0;
+      const increment = finalValue / 50;
+      const interval = setInterval(() => {
+        currentValue += increment;
+        if (currentValue >= finalValue) {
+          setter(finalValue);
+          clearInterval(interval);
+        } else {
+          setter(Math.ceil(currentValue));
+        }
+      }, 20);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          incrementCounts();
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (featuresRef.current) {
+      observer.observe(featuresRef.current);
+    }
+
+    return () => {
+      if (featuresRef.current) {
+        observer.unobserve(featuresRef.current);
+      }
+    };
+  }, [hasAnimated]);
 
   const openLightbox = (image) => {
     setLightboxImage(image);
@@ -44,7 +91,7 @@ const Gallery = () => {
           </p>
         </div>
         {loading ? (
-          <SkeletonLoader /> 
+          <SkeletonLoader />
         ) : (
           <div className={style.swiper}>
             <Swiper
@@ -103,21 +150,21 @@ const Gallery = () => {
             </div>
           </div>
         )}
-        <div className={style.features}>
+        <div className={style.features} ref={featuresRef}>
           <div>
-            <span>4</span>
+            <span>{hotels}</span>
             <p>Hotels</p>
           </div>
           <div>
-            <span>127</span>
+            <span>{rooms}</span>
             <p>Rooms</p>
           </div>
           <div>
-            <span>6</span>
+            <span>{beaches}</span>
             <p>Beaches</p>
           </div>
           <div>
-            <span>4586</span>
+            <span>{guests}+</span>
             <p>Guests</p>
           </div>
         </div>

@@ -87,7 +87,7 @@ const AllRooms = () => {
             )
           )}
         </div>
-        {visible < filteredData.length && !loading && (
+        {visible < filteredData.length  && (
           <div className={style.load}>
             <button className={style.loadMore} onClick={showMoreItems}>
               Load more

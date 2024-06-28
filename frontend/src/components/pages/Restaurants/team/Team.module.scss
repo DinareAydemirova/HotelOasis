@@ -39,7 +39,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
-      
+
       .member {
         background-color: white;
         padding: 15px;
@@ -58,11 +58,19 @@
           font-weight: 400;
           color: #64688c;
         }
-        img {
+        .imageWrapper {
+          overflow: hidden;
           border-radius: 10px;
-          height: 300px;
-
+          img {
+            border-radius: 10px;
+            height: 300px;
+            transition: transform 0.5s ease-in-out;
+          }
+          img:hover {
+            transform: scale(1.1);
+          }
         }
+
         .social {
           display: flex;
 

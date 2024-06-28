@@ -34,10 +34,12 @@ const Team = () => {
           {filteredData.map((elem) => {
             return (
               <div className={style.member}>
+                <div className={style.imageWrapper}>
                 <img
                   src={elem.image}
                   alt=""
                 />
+                </div>
                 <h3>{elem.fullname}</h3>
                 <p>{elem.position}</p>
                 <div className={style.social}>
