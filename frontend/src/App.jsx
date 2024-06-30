@@ -36,8 +36,9 @@ import Page404 from "./components/pages/404Page/Index";
 import PrivateRoute from "./routes/PrivateRouter";
 import LinkToResetPassword from "./components/pages/ResetPassword/ResetPasswordLink/Index";
 import RoomDetailAdmin from "./components/pages/AdminPanel/ManageRooms/roomDetail/Index";
-import Profile from "./components/pages/Profile/Index";
 import TableReservation from "./components/pages/AdminPanel/TableReservation/Index";
+import Comments from "./components/pages/AdminPanel/ManageCooments/Index";
+import Bookings from "./components/pages/AdminPanel/manageBookings/Index";
 
 
 function App() {
@@ -76,7 +77,6 @@ function App() {
           <Route path="resetpassword" element={<ResetPassword />} />
           <Route path="linktoresetpassword" element={<LinkToResetPassword />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="profile/users/:id" element={<Profile />} />
         </Route>
         <Route element={<PrivateRoute roles={["Admin"]} />}>
             <Route path="admin/*" element={<AdminPanel />}>
@@ -88,6 +88,8 @@ function App() {
               <Route path="team" element={<ManageTeam />} />
               <Route path="users" element={<ManageUsers />} />
               <Route path="reservation" element={<TableReservation />} />
+              <Route path="comment" element={<Comments />} />
+              <Route path="booking" element={<Bookings />} />
               <Route path="rooms/:id" element={<RoomDetailAdmin />} />
               <Route path="menu/:id" element={<MenuDetail />} />
               <Route path="team/:id" element={<TeamDetail />} />

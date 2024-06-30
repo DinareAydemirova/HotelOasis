@@ -7,6 +7,8 @@ const menuController=require("../controllers/menuController")
 const restaurantController=require("../controllers/restaureantController")
 const bookingController=require("../controllers/bookingController")
 const reserveController=require("../controllers/reserveController")
+const commentontroller=require("../controllers/commentController")
+
 
 router.get("/gallery", galleryController.getAllImages)
 router.post("/gallery", galleryController.postImages)
@@ -58,6 +60,14 @@ router.get("/reservation/:id", reserveController.getReserveById)
 router.delete("/reservation/:id", reserveController.deleteReservationById)
 router.patch("/reservation/:id", reserveController.patchReserveById)
 router.put("/reservation/:id", reserveController.putReserveById)
+
+
+router.get("/comment", commentontroller.getAllComments)
+router.post("/comment", commentontroller.postComment)
+router.get("/comment/:id", commentontroller.getCommentById)
+router.delete("/comment/:id", commentontroller.deleteCommentById)
+router.patch("/comment/:id", commentontroller.patchgCommentId)
+router.put("/comment/:id", commentontroller.putCommentById)
 
 
 module.exports = router

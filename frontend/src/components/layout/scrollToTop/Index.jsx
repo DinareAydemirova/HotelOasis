@@ -36,9 +36,9 @@ const ScrollToTopButton = () => {
           <button onClick={scrollToTop}>
             <FaArrowUp />
           </button>
-          <button className={style.message}>
+          <Link to="/contact" className={style.message}>
             <MdMessage />
-          </button>
+          </Link>
         </div>
       )}
     </div>

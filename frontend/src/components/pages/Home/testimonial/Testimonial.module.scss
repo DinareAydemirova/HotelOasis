@@ -5,69 +5,66 @@
 }
 
 .testimonialSec {
+  padding: 150px 0 150px 0;
   background-color: #f1ffff;
-  padding: 100px 0;
-  letter-spacing: 1px;
 
   .container {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
+  }
 
-    .headings {
-      font-family: "Jost", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 15px;
-      margin-bottom: 50px;
-      h1 {
-        font-size: 38px;
-        font-weight: 600;
-        color: #383a4e;
-      }
-      p {
-        font-size: 15px;
-        color: #64688c;
-        max-width: 700px;
-      }
+  .headings {
+    text-align: center;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 38px;
+      font-weight: 600;
+      color: #383a4e;
+      margin-bottom: 20px;
     }
-    .comments {
-      display: flex;
-      .splide__pagination {
-        margin-top: 20px; // Add margin to the top of pagination dots
-      }
-      .comment {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-top: 50px;
-        img {
-          border-radius: 50%;
-          max-width: 60px;
-          height: 60px;
-        }
-        p {
-          font-size: 15px;
-          color: #64688c;
-          max-width: 600px;
-        
-        }
-        .text {
-          background-color: white;
-          padding: 30px;
-          border-radius: 10px;
-          
-        }
 
-        h2 {
-          font-size: 24px;
-          font-weight: 600;
-        }
-      }
+    p {
+      font-size: 15px;
+      color: #646875;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+  }
+
+  .comments {
+    .splide__pagination {
+      margin-top: 20px;
+    }
+  }
+
+  .comment {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .commentContent {
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+
+    h2 {
+      font-size: 1.5em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .text {
+      font-size: 1em;
+      color: #555;
+      line-height: 1.6;
     }
   }
 }
+

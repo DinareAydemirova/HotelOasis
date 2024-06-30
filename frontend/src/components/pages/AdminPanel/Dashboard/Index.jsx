@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 const Dashboard = () => {
   const [rooms, setRooms] = useState([]);
   const [users, setUsers] = useState([]);
+  const [comment, setComments] = useState([]);
+
 
   useEffect(() => {
     axios.get("/rooms").then((res) => {
@@ -15,6 +17,11 @@ const Dashboard = () => {
   useEffect(() => {
     axios.get("/users").then((res) => {
       setUsers(res.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("/comment").then((res) => {
+      setComments(res.data);
     });
   }, []);
 
@@ -38,7 +45,7 @@ const Dashboard = () => {
                 <div className="text-sm text-gray-400">Total Comments</div>
                 <div className="flex items-center pt-1">
                   <div className="text-xl font-medium text-indigo-400">
-                    $9850.90
+                    {comment.length}
                   </div>
                 </div>
               </div>
@@ -117,46 +124,7 @@ const Dashboard = () => {
                 </svg>
               </div>
             </div>
-            <div className="flex items-center justify-between p-5 bg-white rounded shadow-sm">
-              <div>
-                <div className="text-sm text-gray-400 ">MRR</div>
-                <div className="flex items-center pt-1">
-                  <div className="text-xl font-medium text-indigo-400 ">
-                    $250.00
-                  </div>
-                </div>
-              </div>
-              <div className="text-gray-300">
-                <svg
-                  className="w-8 h-8"
-                  viewBox="0 0 47 46"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M23.5 38.3334V19.1667"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M35.25 38.3334V7.66675"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M11.75 38.3334V30.6667"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

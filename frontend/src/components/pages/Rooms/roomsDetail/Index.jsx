@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import style from "../roomsDetail/detail.module.scss";
@@ -7,6 +7,10 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import dayjs from "dayjs";
 import { Helmet } from "react-helmet";
+import emailjs from "@emailjs/browser";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LeaveComment from "../leaveComment/Index";
 
 const RoomDetail = () => {
   const [data, setData] = useState({
@@ -20,6 +24,7 @@ const RoomDetail = () => {
   const [showModal, setShowModal] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [bookingError, setBookingError] = useState("");
+  const form = useRef();
 
   const { id } = useParams();
 
@@ -55,15 +60,41 @@ const RoomDetail = () => {
         checkOut: values.checkOut,
         totalAmount: total,
       });
+      sendEmail(values);
+      toast.success("Booking successful! check your email");
     } catch (error) {
       setBookingError("This room is already booked for the selected dates.");
       console.error("Error posting booking data:", error);
+      toast.error("Booking failed: This room is already booked for the selected dates.");
     }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
     setBookingError("");
+  };
+
+  const sendEmail = (values) => {
+    const templateParams = {
+      from_email: values.email,
+      to_email: values.email,
+      to_name: "Kinsley team",
+      checkIn: values.checkIn,
+      checkOut: values.checkOut,
+      totalPrice: totalPrice,
+      roomName: data.name,
+    };
+
+    emailjs
+      .send("service_dhp5dpe", "template_43000fy", templateParams, "B0TWgyT1gV8R_WZiW")
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
   };
 
   return (
@@ -76,6 +107,7 @@ const RoomDetail = () => {
           type="image/x-icon"
         />
       </Helmet>
+      <ToastContainer />
       <div className={style.container}>
         <div className={style.heading}>
           <h1>Deluxe Room</h1>
@@ -121,6 +153,9 @@ const RoomDetail = () => {
               validationSchema={Yup.object({
                 checkIn: Yup.date().required("Check-in date is required"),
                 checkOut: Yup.date().required("Check-out date is required"),
+                email: Yup.string()
+                  .required("Email is required")
+                  .email("Invalid email address"),
               })}
               onSubmit={(values) => {
                 handleBookClick(values);
@@ -145,14 +180,29 @@ const RoomDetail = () => {
                     className="text-red-500 text-sm"
                   />
                 </div>
-
-                <button type="submit">Pay</button>
+                <div className="flex flex-col">
+                  <label htmlFor="email">Your Email</label>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="span"
+                    className="text-red-500 text-sm"
+                  />
+                </div>
+                <button type="submit">Book</button>
               </Form>
             </Formik>
           </div>
         </div>
       </div>
 
+      <LeaveComment/>
+        
       {showModal && (
         <div className={style.modalBackdrop}>
           <div className={style.modalContent}>
@@ -180,27 +230,10 @@ const RoomDetail = () => {
                   .positive("CVC must be positive")
                   .min(100, "CVC must be 3 digits")
                   .max(999, "CVC must be 3 digits"),
-                email: Yup.string()
-                  .required("Email is required")
-                  .email("Invalid email address"),
               })}
               onSubmit={(values) => {}}
             >
               <Form action="" className={style.modalForm}>
-                <div className="flex flex-col">
-                  <label htmlFor="email">Your Email</label>
-                  <Field
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="example@gmail.com"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="span"
-                    className="text-red-500 text-sm"
-                  />
-                </div>
                 <div className="flex flex-col">
                   <label htmlFor="cardNumber">Card number</label>
                   <Field

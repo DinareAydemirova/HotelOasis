@@ -6,6 +6,8 @@ import { GrGallery } from "react-icons/gr";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { AiOutlineTeam } from "react-icons/ai";
 import { MdOutlineTableBar } from "react-icons/md";
+import { FaRegComments } from "react-icons/fa";
+import { BsBookmarks } from "react-icons/bs";
 
 
 
@@ -99,6 +101,34 @@ function AdminPanel() {
             >
               <p className="flex items-center gap-4">
               <MdOutlineTableBar />    Reservation
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/booking"
+              className={`block py-2 px-4 rounded hover:bg-gray-700 hover:text-white ${
+                location.pathname === "/admin/booking"
+                  ? "bg-gray-700 text-white"
+                  : ""
+              }`}
+            >
+              <p className="flex items-center gap-4">
+              <BsBookmarks />   Bookings
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/comment"
+              className={`block py-2 px-4 rounded hover:bg-gray-700 hover:text-white ${
+                location.pathname === "/admin/comment"
+                  ? "bg-gray-700 text-white"
+                  : ""
+              }`}
+            >
+              <p className="flex items-center gap-4">
+              <FaRegComments />    Comments
               </p>
             </Link>
           </li>

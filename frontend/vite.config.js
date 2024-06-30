@@ -29,6 +29,9 @@ export default defineConfig({
       },
       "/reservation":{
         target:"http://localhost:3000"
+      },
+      "/comment":{
+        target:"http://localhost:3000"
       }
     }
   }
