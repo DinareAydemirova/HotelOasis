@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../../Home/testimonial/Testimonial.module.scss";
-import { CgQuote } from "react-icons/cg";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
+import axios from "axios";
 
 const Testimonial = () => {
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    axios.get("/comment").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
+  const splideOptions = {
+    type: 'loop',
+    perPage: 3,
+    perMove: 1,
+    autoplay: true,
+    interval: 3000,
+    pagination: true,
+    arrows: true,
+    breakpoints: {
+      768: {
+        perPage: 1,
+      },
+      1024: {
+        perPage: 2,
+      },
+    },
+  };
+
   return (
     <div className={style.testimonialSec}>
       <div className={style.container}>
@@ -17,68 +43,15 @@ const Testimonial = () => {
             illo odio.
           </p>
         </div>
-        <Splide className={style.comments}>
-          <SplideSlide className={style.comment}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/10/faces-3-scaled-1-140x140.jpg"
-              alt=""
-            />
-            <h2>Viktoria Freeman</h2>
-            <p>From Ukraine</p>
-
-            <p className={style.text}>
-              Dequi folores dolor sit amet, consectetur adipisicing elit.
-              Nesciunt illo, delectus totam! Delectus illo magnam voluptatem a
-              tempora id vitae dolor, quis natus iusto molestiae ab nam error
-              vero possimus ullam facilis porro veritatis?
-            </p>
-          </SplideSlide>
-          <SplideSlide className={style.comment}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/10/faces-4-140x140.jpg"
-              alt=""
-            />
-            <h2>Paul Oldman</h2>
-            <p>From Spain</p>
-
-            <p className={style.text}>
-              Dequi folores dolor sit amet, consectetur adipisicing elit.
-              Nesciunt illo, delectus totam! Delectus illo magnam voluptatem a
-              tempora id vitae dolor, quis natus iusto molestiae ab nam error
-              vero possimus ullam facilis porro veritatis?
-            </p>
-          </SplideSlide>
-          <SplideSlide className={style.comment}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/10/faces-1-140x140.jpg"
-              alt=""
-            />
-            <h2>Viktoria Freeman</h2>
-            <p>From Poland</p>
-
-            <p className={style.text}>
-             
-              Dequi folores dolor sit amet, consectetur adipisicing elit.
-              Nesciunt illo, delectus totam! Delectus illo magnam voluptatem a
-              tempora id vitae dolor, quis natus iusto molestiae ab nam error
-              vero possimus ullam facilis porro veritatis?
-            </p>
-          </SplideSlide>
-          <SplideSlide className={style.comment}>
-            <img
-              src="https://kinsley.bslthemes.com/wp-content/uploads/2021/10/faces-2-140x140.jpg"
-              alt=""
-            />
-            <h2>Emma Trueman</h2>
-            <p>From Italy</p>
-
-            <p className={style.text}>
-              Dequi folores dolor sit amet, consectetur adipisicing elit.
-              Nesciunt illo, delectus totam! Delectus illo magnam voluptatem a
-              tempora id vitae dolor, quis natus iusto molestiae ab nam error
-              vero possimus ullam facilis porro veritatis?
-            </p>
-          </SplideSlide>
+        <Splide options={splideOptions} className={style.comments}>
+          {data.map((elem) => (
+            <SplideSlide key={elem._id} className={style.comment}>
+              <div className={style.commentContent}>
+                <h2>{elem.username}</h2>
+                <p className={style.text}>{elem.comment}</p>
+              </div>
+            </SplideSlide>
+          ))}
         </Splide>
       </div>
     </div>
